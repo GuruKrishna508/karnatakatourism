@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coastal Karnataka - Discover Karnataka</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px 30px 0 0;
+            margin-top: 2rem;
+            overflow: hidden;
+        }
+
+        .intro-section {
+            padding: 3rem 0;
+            text-align: center;
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .intro-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .intro-section p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Destinations Grid */
+        .destinations {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .destination-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+
+        .card-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .destination-card:hover .card-image img {
+            transform: scale(1.1);
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .card-content {
+            padding: 2rem;
+        }
+
+        .card-description {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlights {
+            margin-bottom: 1.5rem;
+        }
+
+        .highlights h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .highlight-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .highlight-tag {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .destinations-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Discover Karnataka</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Coastal Karnataka</h1>
+            <p>Discover the pristine beaches, ancient temples, and vibrant culture of Karnataka's stunning coastline</p>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <section class="intro-section">
+            <div class="container">
+                <h2>Where Azure Waters Meet Golden Sands</h2>
+                <p>Karnataka's 320-kilometer coastline along the Arabian Sea is a treasure trove of natural beauty, spiritual heritage, and cultural richness. From the pilgrimage town of Udupi to the beach paradise of Gokarna, each destination offers a unique blend of serenity and adventure.</p>
+            </div>
+        </section>
+
+        <section class="destinations" id="destinations">
+            <div class="container">
+                <h2 class="section-title">Coastal Gems of Karnataka</h2>
+                <div class="destinations-grid">
+                    <div class="destination-card">
+                        <div class="card-image">
+                            <img src="cimages/c1.jpg" alt="Gokarna Beach">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Gokarna</h3>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-description">
+                                Known as the "Varanasi of the South," Gokarna seamlessly blends spiritual significance with natural beauty. This sacred town offers pristine beaches, ancient temples, and a laid-back atmosphere that attracts both pilgrims and beach lovers.
+                            </p>
+                            <div class="highlights">
+                                <h4>Key Attractions:</h4>
+                                <div class="highlight-list">
+                                    <span class="highlight-tag">Om Beach</span>
+                                    <span class="highlight-tag">Mahabaleshwar Temple</span>
+                                    <span class="highlight-tag">Kudle Beach</span>
+                                    <span class="highlight-tag">Half Moon Beach</span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="destination-card">
+                        <div class="card-image">
+                            <img src="cimages/c2.jpg" alt="Udupi Temple">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Udupi</h3>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-description">
+                                The temple town of Udupi is famous for its Krishna temple, delicious South Indian cuisine, and rich cultural heritage. Experience the divine atmosphere, savor authentic Udupi delicacies, and explore the nearby pristine beaches.
+                            </p>
+                            <div class="highlights">
+                                <h4>Key Attractions:</h4>
+                                <div class="highlight-list">
+                                    <span class="highlight-tag">Sri Krishna Temple</span>
+                                    <span class="highlight-tag">Malpe Beach</span>
+                                    <span class="highlight-tag">St. Mary's Island</span>
+                                    <span class="highlight-tag">Udupi Cuisine</span>
+                                </div>
+                            </div>
+                          
+                        </div>
+                    </div>
+
+                    <div class="destination-card">
+                        <div class="card-image">
+                            <img src="cimages/c3.jpg" alt="Murudeshwar Temple and Beach">
+                            <div class="card-overlay">
+                                <h3 class="card-title">Murudeshwar</h3>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <p class="card-description">
+                                Home to the world's second-tallest Shiva statue, Murudeshwar offers a perfect blend of spirituality and scenic beauty. The towering statue overlooks the Arabian Sea, creating a breathtaking vista that leaves visitors spellbound.
+                            </p>
+                            <div class="highlights">
+                                <h4>Key Attractions:</h4>
+                                <div class="highlight-list">
+                                    <span class="highlight-tag">Shiva Statue</span>
+                                    <span class="highlight-tag">Murudeshwar Temple</span>
+                                    <span class="highlight-tag">Beach Activities</span>
+                                    <span class="highlight-tag">Water Sports</span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Discover Karnataka</h3>
+                    <p>Your gateway to exploring the incredible beauty and rich heritage of Karnataka's coastal region.</p>
+                </div>
+                
+                
+            </div>
+            <div style="border-top: 1px solid #555; padding-top: 2rem; margin-top: 2rem;">
+                <p>&copy; 2025 Discover Karnataka. All rights reserved. | Crafted with ❤️ for travelers</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

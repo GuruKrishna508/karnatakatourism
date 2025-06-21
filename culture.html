@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cultural Heritage of Karnataka</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            animation: slideDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: #f0f0f0;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .culture-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .culture-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .culture-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #ffd700, #4ecdc4);
+            transition: height 0.3s ease;
+        }
+
+        .culture-card:hover::before {
+            height: 8px;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .culture-card:hover .card-image {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 30px;
+        }
+
+        .card-title {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #ffd700);
+            transition: width 0.3s ease;
+        }
+
+        .culture-card:hover .card-title::after {
+            width: 100%;
+        }
+
+        .card-description {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .card-highlights {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .card-highlights h4 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .card-highlights ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card-highlights li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .card-highlights li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 20%; right: 15%; animation-delay: 2s; }
+        .floating-element:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 4s; }
+        .floating-element:nth-child(4) { bottom: 10%; right: 10%; animation-delay: 1s; }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .culture-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .card-content {
+                padding: 20px;
+            }
+        }
+
+        .culture-card:nth-child(1) { animation-delay: 0.2s; }
+        .culture-card:nth-child(2) { animation-delay: 0.4s; }
+        .culture-card:nth-child(3) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element">🎭</div>
+        <div class="floating-element">🥁</div>
+        <div class="floating-element">🎪</div>
+        <div class="floating-element">🏛️</div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <h1>Cultural Heritage of Karnataka</h1>
+            <p>Discover the rich tapestry of traditions, festivals, and performing arts that define the cultural soul of Karnataka</p>
+        </header>
+
+        <div class="culture-grid">
+            <div class="culture-card">
+                <img src="cultureimages/dasara.jpg" alt="Mysuru Dasara Festival" class="card-image">
+                <div class="card-content">
+                    <h2 class="card-title">Mysuru Dasara</h2>
+                    <p class="card-description">
+                        The grandest festival of Karnataka, Mysuru Dasara is a magnificent 10-day celebration that transforms the royal city into a spectacular showcase of tradition, culture, and heritage. Known as Nada Habba (State Festival), it celebrates the victory of good over evil with unparalleled pomp and grandeur.
+                    </p>
+                    <div class="card-highlights">
+                        <h4>Festival Highlights:</h4>
+                        <ul>
+                            <li>Magnificent procession of decorated elephants</li>
+                            <li>Illuminated Mysuru Palace with 97,000 light bulbs</li>
+                            <li>Traditional Dasara Durbar ceremony</li>
+                            <li>Cultural performances and classical music concerts</li>
+                            <li>Jumbo Savari - the grand finale procession</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="culture-card">
+                <img src="cultureimages/yaksha.jpg" alt="Yakshagana Performance" class="card-image">
+                <div class="card-content">
+                    <h2 class="card-title">Yakshagana</h2>
+                    <p class="card-description">
+                        A mesmerizing traditional theatre form that combines dance, music, dialogue, costume, and stage techniques. Yakshagana, meaning "song of the spirits," is a night-long performance art that brings ancient epics and mythological stories to life through elaborate costumes, vibrant makeup, and powerful storytelling.
+                    </p>
+                    <div class="card-highlights">
+                        <h4>Art Form Features:</h4>
+                        <ul>
+                            <li>Intricate face paintings and elaborate costumes</li>
+                            <li>Powerful vocals accompanied by traditional instruments</li>
+                            <li>Dynamic dance movements and acrobatic sequences</li>
+                            <li>Stories from Ramayana, Mahabharata, and Puranas</li>
+                            <li>UNESCO recognized intangible cultural heritage</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="culture-card">
+                <img src="cultureimages/daiva.jpg" alt="Daivaradhane Ritual" class="card-image">
+                <div class="card-content">
+                    <h2 class="card-title">Daivaradhane</h2>
+                    <p class="card-description">
+                        An ancient spirit worship tradition practiced in coastal Karnataka, Daivaradhane is a sacred ritual where local deities (Daivas) are invoked through elaborate ceremonies. This unique cultural practice showcases the deep spiritual connection between the community and their ancestral spirits, featuring trance performances and divine possession.
+                    </p>
+                    <div class="card-highlights">
+                        <h4>Ritual Elements:</h4>
+                        <ul>
+                            <li>Sacred trance performances by trained artists</li>
+                            <li>Ornate costumes and traditional headgear</li>
+                            <li>Ancient oral traditions and folk narratives</li>
+                            <li>Community participation and collective worship</li>
+                            <li>Preservation of local legends and folklore</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scrolling and interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.culture-card');
+            
+            // Intersection Observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+
+            // Add click interaction for cards
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

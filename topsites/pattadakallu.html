@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pattadakallu - The Crown Jewel of Chalukyan Architecture</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lora:wght@400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Lora', serif;
+            background: linear-gradient(45deg, #8B4513 0%, #CD853F 25%, #DEB887 50%, #8B4513 75%, #CD853F 100%);
+            background-size: 400% 400%;
+            animation: heritageGradient 18s ease infinite;
+            margin: 0;
+            padding: 0;
+            color: #2e2e2e;
+            overflow-x: hidden;
+        }
+        
+        @keyframes heritageGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            opacity: 0.15;
+        }
+        
+        .particle {
+            position: absolute;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="3" fill="%23FFD700"/><circle cx="75" cy="75" r="2" fill="%23DEB887"/><circle cx="50" cy="15" r="2.5" fill="%23FFA500"/><circle cx="80" cy="40" r="2" fill="%23FFD700"/></svg>');
+            background-size: contain;
+            width: 20px;
+            height: 20px;
+            animation: templeFloat 30s infinite linear;
+        }
+        
+        @keyframes templeFloat {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        header {
+            position: relative;
+            background-image: url('../bgimages/pattadakallu1.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(139, 69, 19, 0.4) 0%, transparent 70%);
+            animation: templePulse 6s ease-in-out infinite;
+        }
+        
+        @keyframes templePulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+        
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5em, 8vw, 5em);
+            margin: 0;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(255,215,0,0.6);
+            position: relative;
+            z-index: 10;
+            color: #FFF8DC;
+            letter-spacing: 2px;
+        }
+        
+        header p {
+            font-size: 1.4em;
+            margin-top: 20px;
+            font-weight: 400;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+            position: relative;
+            z-index: 10;
+            color: #DEB887;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+            font-style: italic;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        nav {
+            background: linear-gradient(135deg, #8B4513, #CD853F);
+            border-top: 3px solid #DEB887;
+            border-bottom: 3px solid #DEB887;
+            display: flex;
+            justify-content: center;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.4);
+        }
+        
+        nav a {
+            color: #FFF8DC;
+            margin: 0 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+        
+        nav a::before {
+            content: '🏛️';
+            position: relative;
+            margin-right: 8px;
+            font-size: 0.8em;
+        }
+        
+        nav a:hover {
+            color: #DEB887;
+            background: rgba(222, 184, 135, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        section {
+            padding: 80px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        section::before {
+            content: '🏛️ 🕉️ 🏺';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            letter-spacing: 20px;
+        }
+        
+        #heritage {
+            background: linear-gradient(145deg, rgba(255, 248, 220, 0.95), rgba(222, 184, 135, 0.95));
+            border: 2px solid #DEB887;
+            border-radius: 15px;
+            margin: 40px auto;
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.2), inset 0 1px 0 rgba(255,255,255,0.6);
+            position: relative;
+        }
+        
+        #heritage::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #DEB887, #CD853F, #8B4513, #DEB887);
+            border-radius: 17px;
+            z-index: -1;
+        }
+        
+        #places-to-see {
+            background: linear-gradient(145deg, rgba(222, 184, 135, 0.95), rgba(255, 248, 220, 0.95));
+            border: 2px solid #CD853F;
+            border-radius: 15px;
+            margin: 40px auto;
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.2), inset 0 1px 0 rgba(255,255,255,0.6);
+            position: relative;
+        }
+        
+        #places-to-see::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #CD853F, #DEB887, #8B4513, #CD853F);
+            border-radius: 17px;
+            z-index: -1;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: #8B4513;
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(139, 69, 19, 0.3);
+        }
+        
+        h2::before {
+            content: '🏛️ 🕉️ 🏺';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+            letter-spacing: 10px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #DEB887, #CD853F, #DEB887, transparent);
+            border-radius: 2px;
+        }
+        
+        #heritage p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+        
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .card {
+            background: linear-gradient(145deg, rgba(255, 248, 220, 0.98), rgba(222, 184, 135, 0.98));
+            border: 2px solid #DEB887;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.15), inset 0 1px 0 rgba(255,255,255,0.8);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid rgba(222, 184, 135, 0.3);
+            border-radius: 8px;
+            pointer-events: none;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(139, 69, 19, 0.25), inset 0 1px 0 rgba(255,255,255,0.9);
+            border-color: #CD853F;
+        }
+        
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            margin-top: 0;
+            color: #8B4513;
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-align: center;
+            border-bottom: 2px solid #DEB887;
+            padding-bottom: 10px;
+        }
+        
+        .card h3::before {
+            content: '🏛️ ';
+            margin-right: 8px;
+        }
+        
+        .card p {
+            color: #8B4513;
+            line-height: 1.7;
+            font-size: 1.1em;
+            font-weight: 400;
+            text-align: justify;
+        }
+        
+        .learn-options {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .learn-options a {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #8B4513, #CD853F);
+            color: #FFF8DC;
+            border: 2px solid #DEB887;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+        }
+        
+        .learn-options a::before {
+            content: '🏛️ ';
+            margin-right: 8px;
+        }
+        
+        .learn-options a:hover {
+            background: linear-gradient(135deg, #CD853F, #DEB887);
+            color: #8B4513;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+            border-color: #8B4513;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, #8B4513, #CD853F);
+            border-top: 3px solid #DEB887;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 14px;
+            color: #FFF8DC;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '🏛️ 🕉️ ⚱️ 🕉️ 🏛️';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            letter-spacing: 15px;
+        }
+        
+        footer p {
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+        
+        #directions-button {
+            background: linear-gradient(135deg, #DEB887, #CD853F);
+            color: #8B4513;
+            padding: 15px 35px;
+            text-decoration: none;
+            border: 2px solid #8B4513;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            box-shadow: 0 6px 20px rgba(222, 184, 135, 0.3);
+        }
+        
+        #directions-button::before {
+            content: '🧭 ';
+            margin-right: 8px;
+        }
+        
+        #directions-button:hover {
+            background: linear-gradient(135deg, #8B4513, #DEB887);
+            text-decoration: none;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(222, 184, 135, 0.4);
+            border-color: #CD853F;
+            color: #FFF8DC;
+        }
+        
+        @media (max-width: 768px) {
+            .card-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            header {
+                padding: 80px 20px;
+            }
+            
+            section {
+                padding: 50px 20px;
+            }
+            
+            h2 {
+                font-size: 2.2em;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav a {
+                margin: 5px 15px;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <div class="bg-animation" id="bg-animation"></div>
+
+    <header>
+        <h1>Welcome to Pattadakallu</h1>
+        <p>The Crown Jewel of Chalukyan Architecture</p>
+    </header>
+
+    <nav>
+    </nav>
+    
+    <section id="heritage">
+        <h2>Architectural Heritage</h2>
+        <p>
+            Pattadakallu, a UNESCO World Heritage Site, stands as a testament to the architectural brilliance of the Chalukyan dynasty in Karnataka, India. Located on the banks of the Malaprabha River, this ancient temple complex represents the pinnacle of South Indian temple architecture from the 7th and 8th centuries CE. The site contains ten magnificent temples that showcase the evolution of temple architecture, blending both Dravidian and Nagara styles. The most prominent among these is the Virupaksha Temple, built in 740 CE by Queen Lokamahadevi to commemorate her husband Vikramaditya II's victory over the Pallavas. The intricate stone carvings, sculptural masterpieces, and architectural innovations at Pattadakallu influenced temple construction across South India for centuries. Each temple tells a story of devotion, artistry, and cultural synthesis, making it one of India's most important archaeological sites. The complex serves as an open-air museum of ancient Indian architecture, where visitors can witness the transition from early Chalukyan to later medieval temple styles.
+        </p>
+        <div class="learn-options">
+            <a href="https://en.wikipedia.org/wiki/Pattadakal" target="_blank">Read more on Wikipedia</a>
+        </div>
+    </section>
+
+    <section id="places-to-see">
+        <h2>Architectural Marvels</h2>
+        <div class="card-container">
+            <div class="card">
+                <h3>Virupaksha Temple</h3>
+                <p>The grandest temple in the complex, built in 740 CE by Queen Lokamahadevi. This magnificent structure showcases exquisite Dravidian architecture with intricate carvings depicting scenes from the Ramayana and Mahabharata, making it a masterpiece of ancient Indian temple art.</p>
+            </div>
+            <div class="card">
+                <h3>Mallikarjuna Temple</h3>
+                <p>A stunning example of Chalukyan architecture, this temple was also built by Queen Lokamahadevi. It features beautiful sculptures of dancing figures, mythological scenes, and intricate floral patterns that demonstrate the artistic excellence of the period.</p>
+            </div>
+            <div class="card">
+                <h3>Sangameshvara Temple</h3>
+                <p>The earliest temple in the complex, begun by Vijayaditya and completed by Vikramaditya II. This temple represents the initial phase of Chalukyan architecture and provides insight into the evolution of South Indian temple design and construction techniques.</p>
+            </div>
+            <div class="card">
+                <h3>Kashi Vishwanath Temple</h3>
+                <p>A unique temple that showcases the Northern (Nagara) style of architecture, demonstrating the cultural exchange and architectural experimentation that took place at Pattadakallu. It features a distinctive curvilinear tower and ornate decorative elements.</p>
+            </div>
+            <div class="card">
+                <h3>Galaganatha Temple</h3>
+                <p>Another example of Northern style architecture, this temple highlights the synthesis of different architectural traditions. The temple features beautiful sculptural work and represents the cosmopolitan nature of Chalukyan artistic expression.</p>
+            </div>
+            <div class="card">
+                <h3>Archaeological Museum</h3>
+                <p>Houses a collection of sculptures, inscriptions, and artifacts from the Pattadakallu complex. The museum provides detailed information about the historical significance, architectural features, and cultural importance of this UNESCO World Heritage Site.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Pattadakallu Heritage Tourism. Preserving Ancient Architectural Splendor.</p>
+        <div class="learn-options">
+            <a href="#" id="directions-button">Directions</a>
+        </div>
+    </footer>
+
+    <script>
+        function createParticles() {
+            const bgAnimation = document.getElementById('bg-animation');
+            const particleCount = 25;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 30 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 25) + 's';
+                bgAnimation.appendChild(particle);
+            }
+        }
+        
+        createParticles();
+        
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        document.getElementById('directions-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const userLat = position.coords.latitude;
+                    const userLng = position.coords.longitude;
+                    
+                    const pattadakalluLat = 15.9449;
+                    const pattadakalluLng = 75.8150;
+                    
+                    const directionsUrl = `https://www.google.com/maps/dir/${userLat},${userLng}/${pattadakalluLat},${pattadakalluLng}/@${(userLat + pattadakalluLat)/2},${(userLng + pattadakalluLng)/2},10z/data=!3m1!4b1!4m2!4m1!3e0`;
+                    
+                    window.open(directionsUrl, '_blank');
+                }, function(error) {
+                    const searchUrl = `https://www.google.com/maps/place/Pattadakal,+Karnataka,+India/@15.9449,75.8150,12z`;
+                    window.open(searchUrl, '_blank');
+                });
+            } else {
+                const searchUrl = `https://www.google.com/maps/place/Pattadakal,+Karnataka,+India/@15.9449,75.8150,12z`;
+                window.open(searchUrl, '_blank');
+            }
+        });
+        
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('header');
+            if (header) {
+                header.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            observer.observe(card);
+        });
+    </script>
+
+</body>
+</html>

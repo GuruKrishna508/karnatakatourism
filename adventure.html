@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventure in Karnataka - Discover Karnataka</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #8B4513 0%, #CD853F 50%, #DEB887 100%);
+            min-height: 100vh;
+            color: #2F1B14;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            background: linear-gradient(45deg, #FF6B35, #F7931E);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.1) 10px,
+                rgba(255,255,255,0.1) 20px
+            );
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%); }
+            100% { transform: translateX(100%) translateY(100%); }
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            color: #FFF;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #FFF8DC;
+            position: relative;
+            z-index: 1;
+        }
+
+        .adventure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .adventure-card {
+            background: transparent;
+            width: 100%;
+            height: 400px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .adventure-card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border: 3px solid #DAA520;
+            overflow: hidden;
+        }
+
+        .card-front {
+            background: linear-gradient(145deg, #FFF8DC, #F5DEB3);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-back {
+            background: linear-gradient(145deg, #2F1B14, #8B4513);
+            transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .card-front::before, .card-back::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #FF6B35, #F7931E, #DAA520);
+        }
+
+        .adventure-card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .card-back img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+
+
+        .adventure-card h3 {
+            font-size: 1.8em;
+            color: #8B4513;
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .adventure-card p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #2F1B14;
+        }
+
+        .location {
+            background: linear-gradient(45deg, #FF6B35, #F7931E);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .features {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .features li {
+            padding: 5px 0;
+            color: #8B4513;
+            font-weight: bold;
+        }
+
+        .features li::before {
+            content: '🏔️';
+            margin-right: 10px;
+        }
+
+        .heritage-section {
+            background: linear-gradient(135deg, #8B0000, #DC143C);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .heritage-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            background-size: 20px 20px;
+        }
+
+        .heritage-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .heritage-section p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(45deg, #2F1B14, #8B4513);
+            color: #FFF8DC;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+
+        .decorative-border {
+            height: 10px;
+            background: linear-gradient(90deg, #FF6B35, #F7931E, #DAA520, #FF6B35);
+            margin: 20px 0;
+            border-radius: 5px;
+            animation: colorShift 4s ease-in-out infinite;
+        }
+
+        @keyframes colorShift {
+            0%, 100% { background: linear-gradient(90deg, #FF6B35, #F7931E, #DAA520, #FF6B35); }
+            50% { background: linear-gradient(90deg, #DAA520, #FF6B35, #F7931E, #DAA520); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .adventure-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🏔️ Adventure in Karnataka 🏔️</h1>
+            <p>Discover the Thrill of God's Own Country's Neighbor</p>
+        </header>
+
+        <div class="decorative-border"></div>
+
+        <div class="adventure-grid">
+            <div class="adventure-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div>
+                            <div class="location">Western Ghats</div>
+                            <h3>🏔️ Trekking in the Sahyadris</h3>
+                            <p>Embark on breathtaking treks through the ancient Western Ghats, where misty peaks and lush forests create a mystical atmosphere. Experience the raw beauty of Karnataka's mountainous terrain.</p>
+                            <ul class="features">
+                                <li>Kudremukh Peak Trek</li>
+                                <li>Mullayanagiri Summit</li>
+                                <li>Baba Budangiri Hills</li>
+                                <li>Brahmagiri Wildlife Trek</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <img src="adventureimages/westrenghats.jpg" alt="Western Ghats Trek" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="adventure-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div>
+                            <div class="location">Dandeli</div>
+                            <h3>🚣 White Water Rafting</h3>
+                            <p>Navigate the roaring rapids of River Kali in Dandeli, where adventure meets pristine nature. Feel the adrenaline rush as you conquer Grade III and IV rapids surrounded by dense forests.</p>
+                            <ul class="features">
+                                <li>Kali River Rapids</li>
+                                <li>Jungle Camping</li>
+                                <li>Wildlife Spotting</li>
+                                <li>Coracle Rides</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <img src="adventureimages/dandeli.jpg" alt="Dandeli White Water Rafting" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="adventure-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div>
+                            <div class="location">Hampi</div>
+                            <h3>🧗 Rock Climbing & Bouldering</h3>
+                            <p>Scale the ancient granite boulders of Hampi, where history and adventure intertwine. Climb among the ruins of the Vijayanagara Empire while testing your limits on world-class boulder problems.</p>
+                            <ul class="features">
+                                <li>Granite Boulder Fields</li>
+                                <li>Historical Climbing</li>
+                                <li>Sunset Point Climbs</li>
+                                <li>Coracle River Crossing</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <img src="adventureimages/hampi.jpg" alt="Hampi Rock Climbing" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="adventure-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div>
+                            <div class="location">Coorg</div>
+                            <h3>🌲 Jungle Safari & Wildlife</h3>
+                            <p>Venture into the wild heart of Karnataka's coffee country, where elephants roam free and tigers prowl through dense forests. Experience the untamed beauty of Nagarhole and Bandipur.</p>
+                            <ul class="features">
+                                <li>Nagarhole National Park</li>
+                                <li>Bandipur Tiger Reserve</li>
+                                <li>Elephant Spotting</li>
+                                <li>Bird Watching Paradise</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <img src="adventureimages/kodagu.jpg" alt="Coorg Wildlife Safari" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="adventure-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div>
+                            <div class="location">Jog Falls</div>
+                            <h3>💦 Waterfall Rappelling</h3>
+                            <p>Descend the mighty Jog Falls, India's second-highest waterfall, in an ultimate test of courage. Feel the power of cascading water as you rappel down 830 feet of pure natural force.</p>
+                            <ul class="features">
+                                <li>830 Feet Descent</li>
+                                <li>Monsoon Adventures</li>
+                                <li>Photography Spots</li>
+                                <li>Nature's Symphony</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <img src="adventureimages/jogfalls.jpg" alt="Jog Falls Rappelling" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="adventure-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div>
+                            <div class="location">Gokarna</div>
+                            <h3>🏄 Beach Adventures</h3>
+                            <p>Ride the waves of Karnataka's pristine coastline, where golden beaches meet azure waters. Experience the perfect blend of spiritual serenity and coastal thrills in this holy beach town.</p>
+                            <ul class="features">
+                                <li>Surfing at Om Beach</li>
+                                <li>Parasailing Adventures</li>
+                                <li>Beach Trekking</li>
+                                <li>Sunset Kayaking</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <img src="adventureimages/gokarna.jpeg" alt="Gokarna Beach Adventures" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="heritage-section">
+            <h2>🏛️ Adventure Steeped in Heritage 🏛️</h2>
+            <p>Karnataka's adventures are not just about adrenaline - they're journeys through time. Every trek leads to ancient temples, every climb reveals historical secrets, and every river carries stories of dynasties past. From the Hoysala temples hidden in forest clearings to the Vijayanagara ruins that serve as your climbing gym, adventure in Karnataka is a dialogue between past and present, where every heartbeat echoes the footsteps of warriors and kings who once called these lands home.</p>
+        </div>
+
+        <div class="decorative-border"></div>
+
+        <footer class="footer">
+            <h3>🌟 Discover Karnataka - Where Adventure Meets Heritage 🌟</h3>
+            <p>Your gateway to the most thrilling experiences in God's Own Country's neighbor</p>
+        </footer>
+    </div>
+
+    <script>
+        function flipCard(card) {
+            card.classList.toggle('flipped');
+        }
+
+        // Add double-click to flip back for better UX
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.adventure-card');
+            cards.forEach(card => {
+                card.addEventListener('dblclick', function() {
+                    this.classList.remove('flipped');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

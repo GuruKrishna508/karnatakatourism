@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flavors of Karnataka - Discover Karnataka</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #8B4513 0%, #CD853F 50%, #DEB887 100%);
+            min-height: 100vh;
+            color: #2F1B14;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            background: linear-gradient(45deg, #FF6B35, #F7931E);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.1) 10px,
+                rgba(255,255,255,0.1) 20px
+            );
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%); }
+            100% { transform: translateX(100%) translateY(100%); }
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            color: #FFF;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #FFF8DC;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cuisine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .cuisine-card {
+            background: transparent;
+            width: 100%;
+            height: 400px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .cuisine-card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border: 3px solid #DAA520;
+            overflow: hidden;
+        }
+
+        .card-front {
+            background: linear-gradient(145deg, #FFF8DC, #F5DEB3);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-back {
+            background: linear-gradient(145deg, #2F1B14, #8B4513);
+            transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .card-front::before, .card-back::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #FF6B35, #F7931E, #DAA520);
+        }
+
+        .cuisine-card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .card-back img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+
+
+        .cuisine-card h3 {
+            font-size: 1.8em;
+            color: #8B4513;
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .cuisine-card p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #2F1B14;
+        }
+
+        .region {
+            background: linear-gradient(45deg, #FF6B35, #F7931E);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .features {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .features li {
+            padding: 5px 0;
+            color: #8B4513;
+            font-weight: bold;
+        }
+
+        .features li::before {
+            content: '🍽️';
+            margin-right: 10px;
+        }
+
+        .heritage-section {
+            background: linear-gradient(135deg, #8B0000, #DC143C);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .heritage-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            background-size: 20px 20px;
+        }
+
+        .heritage-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .heritage-section p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(45deg, #2F1B14, #8B4513);
+            color: #FFF8DC;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+
+        .decorative-border {
+            height: 10px;
+            background: linear-gradient(90deg, #FF6B35, #F7931E, #DAA520, #FF6B35);
+            margin: 20px 0;
+            border-radius: 5px;
+            animation: colorShift 4s ease-in-out infinite;
+        }
+
+        @keyframes colorShift {
+            0%, 100% { background: linear-gradient(90deg, #FF6B35, #F7931E, #DAA520, #FF6B35); }
+            50% { background: linear-gradient(90deg, #DAA520, #FF6B35, #F7931E, #DAA520); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .cuisine-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🍽️ Flavors of Karnataka 🍽️</h1>
+            <p>Discover the Rich Culinary Heritage of Karnataka</p>
+        </header>
+
+        <div class="decorative-border"></div>
+
+        <div class="cuisine-grid">
+            <div class="cuisine-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div>
+                            <div class="region">Mysore</div>
+                            <h3>🍛 Mysore Pak</h3>
+                            <p>The royal sweet of Mysore, this melt-in-your-mouth delicacy made from ghee, sugar, and gram flour is a testament to Karnataka's rich confectionery tradition. Born in the royal kitchens of Mysore Palace.</p>
+                            <ul class="features">
+                                <li>Royal Palace Origins</li>
+                                <li>Ghee & Gram Flour</li>
+                                <li>Melt-in-Mouth Texture</li>
+                                <li>Traditional Recipe</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <img src="cuisineimages/mysurupak.jpg" alt="Mysore Pak" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="cuisine-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div>
+                            <div class="region">South Karnataka</div>
+                            <h3>🥞 Masala Dosa</h3>
+                            <p>The pride of South Indian cuisine, this crispy rice and lentil crepe filled with spiced potato curry is Karnataka's gift to the world. Perfectly golden, incredibly crispy, and absolutely delicious.</p>
+                            <ul class="features">
+                                <li>Crispy Rice & Lentil Crepe</li>
+                                <li>Spiced Potato Filling</li>
+                                <li>Coconut Chutney</li>
+                                <li>Sambar Accompaniment</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <img src="cuisineimages/masaladosa.jpg" alt="Masala Dosa" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="cuisine-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div>
+                            <div class="region">Karnataka</div>
+                            <h3>🍚 Bisi Bele Bath</h3>
+                            <p>A wholesome one-pot meal that combines rice, lentils, and vegetables in a flavorful blend of spices. This comfort food represents the essence of Karnataka's home cooking with its rich, aromatic profile.</p>
+                            <ul class="features">
+                                <li>Rice & Lentil Combo</li>
+                                <li>Mixed Vegetables</li>
+                                <li>Special Spice Blend</li>
+                                <li>Comfort Food Classic</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <img src="cuisineimages/bisibelebath.jpeg" alt="Bisi Bele Bath" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="cuisine-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div>
+                            <div class="region">Coastal Karnataka</div>
+                            <h3>🥞 Neer Dosa</h3>
+                            <p>The delicate, lace-like crepe from coastal Karnataka made with rice batter and water. These paper-thin, translucent beauties are perfect with coconut chutney or any curry of your choice.</p>
+                            <ul class="features">
+                                <li>Paper-Thin Texture</li>
+                                <li>Rice Batter Base</li>
+                                <li>Coastal Specialty</li>
+                                <li>Versatile Pairing</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <img src="cuisineimages/neerdosa.jpg" alt="Neer Dosa" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="cuisine-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div>
+                            <div class="region">Dharwad</div>
+                            <h3>🍮 Dharwad Peda</h3>
+                            <p>The famous milk-based sweet from Dharwad, known for its unique texture and rich flavor. This traditional delicacy has been delighting taste buds for generations with its authentic preparation methods.</p>
+                            <ul class="features">
+                                <li>Milk-Based Sweet</li>
+                                <li>Traditional Preparation</li>
+                                <li>Rich & Creamy Texture</li>
+                                <li>Dharwad Specialty</li>
+                            </ul>
+                        </div>
+                        <div class="flip-hint">Click to see image</div>
+                    </div>
+                    <div class="card-back">
+                        <img src="cuisineimages/dharwadpeda.jpg" alt="Dharwad Peda" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="heritage-section">
+            <h2>🏛️ Culinary Heritage of Karnataka 🏛️</h2>
+            <p>Karnataka's cuisine is a beautiful tapestry woven from centuries of cultural influences. From the royal kitchens of Mysore to the coastal flavors of Mangalore, each dish tells a story of tradition, innovation, and love. The state's diverse geography - from the Western Ghats to the coastal plains - has blessed it with a rich variety of ingredients and cooking techniques that have been passed down through generations, creating a culinary legacy that is both authentic and extraordinary.</p>
+        </div>
+
+        <div class="decorative-border"></div>
+
+        <footer class="footer">
+            <h3>🌟 Discover Karnataka - Where Flavors Meet Heritage 🌟</h3>
+            <p>Your gateway to the most delicious experiences in Karnataka's culinary landscape</p>
+        </footer>
+    </div>
+
+    <script>
+        function flipCard(card) {
+            card.classList.toggle('flipped');
+        }
+
+        // Add double-click to flip back for better UX
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.cuisine-card');
+            cards.forEach(card => {
+                card.addEventListener('dblclick', function() {
+                    this.classList.remove('flipped');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

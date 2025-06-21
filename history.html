@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಕರ್ನಾಟಕ - The Glorious Heritage of Karnataka</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #2c1810 0%, #4a2c1a 25%, #6b3e2a 50%, #8b5e3c 75%, #a67c52 100%);
+            font-family: 'Crimson Text', serif;
+            color: #2c1810;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(139, 94, 60, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(180, 140, 90, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(139, 94, 60, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(1deg); }
+            66% { transform: translateY(10px) rotate(-1deg); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(44, 24, 16, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 10px 0;
+            border-bottom: 3px solid #d4af37;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #d4af37;
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        nav a:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(45deg, #2c1810, #8b5e3c, #d4af37);
+            color: #fff;
+            padding: 100px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10 L60 40 L90 40 L68 58 L78 88 L50 70 L22 88 L32 58 L10 40 L40 40 Z" fill="rgba(212,175,55,0.1)"/></svg>') repeat;
+            background-size: 50px 50px;
+            animation: pattern-move 30s linear infinite;
+        }
+
+        @keyframes pattern-move {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(50px) translateY(50px); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .main-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 20px rgba(212,175,55,0.3); }
+            to { text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 30px rgba(212,175,55,0.6); }
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            font-style: italic;
+            color: #f0e6d2;
+            margin-bottom: 30px;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 20px;
+            margin: -30px 20px 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 3;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f5f0, #e8dcc0);
+            border-radius: 15px;
+            border: 2px solid #d4af37;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #8b5e3c;
+            font-family: 'Cinzel', serif;
+        }
+
+        .stat-label {
+            font-size: 1em;
+            color: #5a3e36;
+            margin-top: 5px;
+        }
+
+        /* Main Container */
+        .container {
+            padding: 60px 30px;
+            max-width: 1200px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.95);
+            margin-top: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        /* Section Headers */
+        h2 {
+            color: #8b5e3c;
+            font-family: 'Cinzel', serif;
+            font-size: 2.2em;
+            font-weight: 600;
+            border-bottom: 3px solid #d4af37;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 50px;
+            height: 3px;
+            background: #8b5e3c;
+        }
+
+        /* Paragraphs */
+        p {
+            line-height: 1.9;
+            font-size: 1.15em;
+            margin-bottom: 25px;
+            text-align: justify;
+            color: #2c1810;
+        }
+
+        /* Decorative Elements */
+        .decor-line {
+            border: none;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #d4af37, #8b5e3c, #d4af37, transparent);
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .decor-line::before {
+            content: '❋';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 0 15px;
+            color: #8b5e3c;
+            font-size: 1.5em;
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .gallery-caption {
+            padding: 15px;
+            background: linear-gradient(135deg, #f8f5f0, #e8dcc0);
+            text-align: center;
+            font-weight: 600;
+            color: #5a3e36;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #d4af37, #8b5e3c);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .timeline-content {
+            background: rgba(248, 245, 240, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 45%;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 55%;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-right: 55%;
+        }
+
+        .timeline-date {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            color: #d4af37;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        /* Interactive Features */
+        .interactive-section {
+            background: linear-gradient(135deg, #2c1810, #8b5e3c);
+            color: white;
+            padding: 50px 30px;
+            margin: 40px 0;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .feature-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .feature-btn {
+            background: linear-gradient(45deg, #d4af37, #f0c74b);
+            color: #2c1810;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .feature-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(45deg, #2c1810, #8b5e3c);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 5px solid #d4af37;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            margin: 20px 0;
+        }
+
+        .footer-links a {
+            color: #d4af37;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #f0c74b;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5em;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+                margin-right: 0 !important;
+            }
+            
+            .feature-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="#home">ಮನೆ (Home)</a></li>
+        <li><a href="#ancient">ಪ್ರಾಚೀನ (Ancient)</a></li>
+        <li><a href="#medieval">ಮಧ್ಯಕಾಲೀನ (Medieval)</a></li>
+        <li><a href="#modern">ಆಧುನಿಕ (Modern)</a></li>
+        <li><a href="#culture">ಸಂಸ್ಕೃತಿ (Culture)</a></li>
+    </ul>
+</nav>
+
+<header id="home">
+    <div class="header-content">
+        <h1 class="main-title">ಕರ್ನಾಟಕ</h1>
+        <p class="subtitle">The Glorious Heritage of Karnataka - Land of Rich Culture and Timeless Traditions</p>
+    </div>
+</header>
+
+<div class="stats-section fade-in">
+    <div class="stats-grid">
+        <div class="stat-item">
+            <div class="stat-number">1,91,791</div>
+            <div class="stat-label">Square Kilometers<br>Area</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">6.1 Crore</div>
+            <div class="stat-label">Population<br>(2011 Census)</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">31</div>
+            <div class="stat-label">Districts</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">1956</div>
+            <div class="stat-label">State Formation<br>Year</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">19</div>
+            <div class="stat-label">Official<br>Languages</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">320 KM</div>
+            <div class="stat-label">Coastline<br>Length</div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <section id="ancient" class="fade-in">
+        <h2>🏛️ Ancient Karnataka - The Cradle of Dynasties</h2>
+        <p>
+            Karnataka's magnificent history spans over 2,000 years, beginning with prehistoric settlements evidenced by Paleolithic tools discovered across the region. The land that would become Karnataka was first unified under the Mauryan Empire, with Emperor Ashoka's edicts at Maski, Brahmagiri, and Sannati marking the earliest recorded governance. The Kadambas (345-525 CE) established the first native dynasty, making Banavasi their capital and laying the foundation for Kannada culture and literature.
+        </p>
+        
+      <div class="image-gallery">
+            <div class="gallery-item flashcard" onclick="flipCard(this)">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <div style="height: 200px; background: linear-gradient(45deg, #8b5e3c, #d4af37); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2em;">Badami Caves</div>
+                        <div class="gallery-caption">Chalukyan Rock-cut Architecture</div>
+                    </div>
+                    <div class="flashcard-back">
+                        <div style="height: 200px; background: linear-gradient(45deg, #2c1810, #8b5e3c); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; padding: 20px;">
+                            <p style="font-size: 0.9em; text-align: center; margin-bottom: 15px;">4 cave temples carved from sandstone cliffs in the 6th century</p>
+                            <button onclick="openWikipedia('https://en.wikipedia.org/wiki/Badami_cave_temples')" class="wiki-btn">Read on Wikipedia</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item flashcard" onclick="flipCard(this)">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <div style="height: 200px; background: linear-gradient(45deg, #2c1810, #8b5e3c); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2em;">Hampi Ruins</div>
+                        <div class="gallery-caption">Vijayanagara Empire Capital</div>
+                    </div>
+                    <div class="flashcard-back">
+                        <div style="height: 200px; background: linear-gradient(45deg, #8b5e3c, #d4af37); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; padding: 20px;">
+                            <p style="font-size: 0.9em; text-align: center; margin-bottom: 15px;">UNESCO World Heritage Site - Ruins of the magnificent Vijayanagara Empire</p>
+                            <button onclick="openWikipedia('https://en.wikipedia.org/wiki/Hampi')" class="wiki-btn">Read on Wikipedia</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item flashcard" onclick="flipCard(this)">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <div style="height: 200px; background: linear-gradient(45deg, #d4af37, #f0c74b); display: flex; align-items: center; justify-content: center; color: #2c1810; font-size: 1.2em;">Hoysala Temples</div>
+                        <div class="gallery-caption">Architectural Marvels of Belur & Halebidu</div>
+                    </div>
+                    <div class="flashcard-back">
+                        <div style="height: 200px; background: linear-gradient(45deg, #2c1810, #8b5e3c); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; padding: 20px;">
+                            <p style="font-size: 0.9em; text-align: center; margin-bottom: 15px;">Masterpieces of 12th-13th century temple architecture with intricate sculptures</p>
+                            <button onclick="openWikipedia('https://en.wikipedia.org/wiki/Hoysala_architecture')" class="wiki-btn">Read on Wikipedia</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p>
+            The Badami Chalukyas (543-753 CE) elevated Karnataka to new heights, creating stunning rock-cut temples and establishing trade relations across Asia. Their successors, the Rashtrakutas, expanded the empire from Karnataka to control much of the Indian subcontinent, leaving behind architectural masterpieces like the Kailasa Temple at Ellora. The Hoysala Empire (1026-1343 CE) represented the pinnacle of medieval Karnataka's artistic achievement, with their temples at Belur, Halebidu, and Somnathpura showcasing unparalleled sculptural detail. The mighty Vijayanagara Empire (1336-1646 CE), with Hampi as its resplendent capital, became one of the world's largest cities and a beacon of Hindu culture, controlling trade routes and fostering arts, literature, and architecture on an unprecedented scale.
+        </p>
+    </section>
+
+    <div class="decor-line"></div>
+
+    <section id="medieval" class="fade-in">
+        <h2>⚔️ Medieval Era - Warriors and Visionaries</h2>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">1336-1565 CE</div>
+                    <strong>Vijayanagara Empire</strong> - Golden age of Hindu culture, with Hampi as a magnificent capital rivaling contemporary European cities in grandeur and population.
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">1565-1760 CE</div>
+                    <strong>Deccan Sultanates</strong> - Bahmani and Adil Shahi dynasties brought Indo-Islamic architecture, creating monuments like Gol Gumbaz in Bijapur.
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">1760-1799 CE</div>
+                    <strong>Mysore Kingdom</strong> - Under Hyder Ali and Tipu Sultan, became a progressive state with modern administration, military innovations, and resistance to British colonialism.
+                </div>
+            </div>
+        </div>
+
+        <p>
+            The fall of Vijayanagara in 1565 marked the end of Hindu political dominance in South India, leading to the rise of the Deccan Sultanates. The Adil Shahi dynasty of Bijapur left an indelible mark with monuments like the Gol Gumbaz, showcasing Indo-Islamic architectural fusion. However, the most remarkable chapter of this era was written by the Kingdom of Mysore under Hyder Ali and his son Tipu Sultan. Tipu Sultan, known as the "Tiger of Mysore," was not merely a military commander but a visionary ruler who introduced the world's first iron-cased rockets, established a modern postal system, promoted sericulture, and created a progressive administrative framework. His fierce resistance against British expansion made him a legendary figure, though his kingdom ultimately fell in 1799 during the Fourth Anglo-Mysore War, paving the way for British dominance in South India.
+        </p>
+    </section>
+
+    <div class="decor-line"></div>
+
+    <section class="fade-in">
+        <h2>🌅 Post-Independence Renaissance</h2>
+        <p>
+            Following India's independence in 1947, the princely state of Mysore under Maharaja Jayachamarajendra Wadiyar seamlessly integrated into the Indian Union. The landmark States Reorganization Act of 1956 created a unified Kannada-speaking state by merging regions from Bombay, Madras, and Hyderabad states with Mysore, initially retaining the name Mysore before being renamed Karnataka in 1973. This reorganization fulfilled the long-cherished dream of "Ekikarna" (unification) and established Karnataka as a cohesive cultural and linguistic entity.
+        </p>
+        <p>
+            The post-independence era witnessed Karnataka's transformation into an industrial and educational hub. Bengaluru emerged as a center for public sector undertakings like Hindustan Aeronautics Limited (HAL), Indian Space Research Organisation (ISRO), and Defence Research and Development Organisation (DRDO). The establishment of premier institutions like the Indian Institute of Science (IISc), Bangalore University, and later the Indian Institute of Management (IIM) created a foundation for Karnataka's future as India's knowledge capital.
+        </p>
+    </section>
+
+    <div class="decor-line"></div>
+
+    <section id="modern" class="fade-in">
+        <h2>🚀 Modern Karnataka - Silicon Valley of India</h2>
+        <p>
+            Contemporary Karnataka stands as a testament to successful modernization while preserving cultural heritage. Bengaluru's evolution from the 'Garden City' to the 'Silicon Valley of India' represents one of the most dramatic urban transformations in modern history. The city hosts global technology giants like Infosys, Wipro, and TCS, while nurturing thousands of startups in a thriving entrepreneurial ecosystem. Karnataka contributes over 40% of India's software exports and leads in biotechnology, aerospace, and research & development.
+        </p>
+        
+       <div class="interactive-section">
+    <h3 style="font-family: 'Cinzel', serif; font-size: 2em; margin-bottom: 20px;">Karnataka's Modern Achievements</h3>
+    <p style="font-size: 1.1em; line-height: 1.6;">From ancient temples to space missions, from classical music to cutting-edge technology - Karnataka seamlessly blends tradition with innovation.</p>
+    <div class="feature-buttons">
+        <a href="topsites.html" class="nav-btn">🏛️ Heritage Sites</a>
+        <a href="culture.html" class="nav-btn">🎭 Cultural Festivals</a>
+        <a href="cuisine.html" class="nav-btn">🍛 Cuisine Diversity</a>
+    </div>
+</div>
+
+<style>
+    .feature-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .nav-btn {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #6c4f3d; /* earthy brown */
+        color: #fff;
+        text-decoration: none;
+        font-family: 'Cinzel', serif;
+        font-size: 1em;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .nav-btn:hover {
+        background-color: #8b5e3c; /* slightly lighter on hover */
+        color: #fff;
+        transform: scale(1.05);
+        border-color: #e0c097; /* golden highlight */
+    }
+
+    .nav-btn:active {
+        transform: scale(0.97);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+</style>
+
+
+        <p>
+            Beyond technology, Karnataka excels in multiple sectors: the state leads in coffee and silk production, houses major automotive manufacturers, and maintains rich biodiversity across the Western Ghats. Tourism thrives with destinations ranging from the historic ruins of Hampi and the palaces of Mysuru to the pristine beaches of Gokarna and the hill stations of Coorg. The state's commitment to education is evident in its numerous universities, research institutions, and the highest number of engineering colleges in India. Karnataka's cultural landscape remains vibrant with classical Carnatic music, traditional dance forms like Bharatanatyam and Kuchipudi, folk arts like Yakshagana, and a rich literary tradition in Kannada that has produced eight Jnanpith Award winners.
+        </p>
+    </section>
+
+    <div class="decor-line"></div>
+
+    <section id="culture" class="fade-in">
+        <h2>🎨 Cultural Heritage - Living Traditions</h2>
+        <p>
+            Karnataka's cultural tapestry is woven from millennia of diverse influences, creating a unique identity that celebrates both classical refinement and folk vibrancy. The state is renowned for its contributions to Carnatic music, with legendary composers like Purandara Dasa earning the title "Father of Carnatic Music." The Mysuru Dasara, dating back over 400 years, remains one of India's grandest festivals, showcasing the state's royal heritage through magnificent processions, cultural performances, and traditional crafts.
+        </p>
+        <p>
+            Traditional art forms like Yakshagana combine dance, music, dialogue, and elaborate costumes to narrate mythological stories, while Dollu Kunitha and Kamsale represent the state's energetic folk dance traditions. Karnataka's architectural legacy spans from the intricate Hoysala temples to the Indo-Islamic monuments of Bijapur, each telling stories of artistic excellence and cultural synthesis. The state's handicrafts—including Mysuru silk sarees, Channapatna toys, sandalwood carvings, and Bidriware—continue to showcase traditional craftsmanship passed down through generations, making Karnataka a living museum of Indian cultural heritage.
+        </p>
+    </section>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <h3 style="font-family: 'Cinzel', serif; color: #d4af37; margin-bottom: 15px;">ಕರ್ನಾಟಕ ಮಾತೆ</h3>
+        <p>Preserving the glorious heritage of Karnataka for future generations</p>
+        <div class="footer-links">
+            
+            <a href="https://karnataka.gov.in/english">Government</a>
+        </div>
+        <p style="margin-top: 20px; font-size: 0.9em;">&copy; 2025 Karnataka Heritage Society | "ಸತ್ಯಮೇವ ಜಯತೆ" - Truth Alone Triumphs</p>
+    </div>
+</footer>
+
+<script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Fade in animation on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Interactive button effects
+    document.querySelectorAll('.feature-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Create ripple effect
+            const ripple = document.createElement('span');
+            ripple.style.position = 'absolute';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(255,255,255,0.6)';
+            ripple.style.transform = 'scale(0)';
+            ripple.style.animation = 'ripple 0.6s linear';
+            
+            this.style.position = 'relative';
+            this.style.overflow = 'hidden';
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+
+    // Add ripple animation CSS
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Dynamic header background
+    let headerAnimation = 0;
+    setInterval(() => {
+        const header = document.querySelector('header');
+        headerAnimation += 0.5;
+        header.style.backgroundPosition = `${Math.sin(headerAnimation * 0.01) * 50}px ${Math.cos(headerAnimation * 0.01) * 30}px`;
+    }, 50);
+</script>
+
+</body>
+</html>

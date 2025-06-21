@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Districts - Discover Karnataka</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+        }
+
+        .districts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .district-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .district-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+        }
+
+        .district-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .district-name {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .district-info {
+            display: grid;
+            gap: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #34495e;
+            min-width: 100px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-label:before {
+            content: '●';
+            color: #3498db;
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        .info-content {
+            flex: 1;
+            color: #555;
+        }
+
+        .taluks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .taluk-tag {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .speciality {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-style: italic;
+            color: #2c3e50;
+        }
+
+        .cuisine {
+            background: linear-gradient(45deg, #a8edea, #fed6e3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            color: #2c3e50;
+        }
+
+        .must-visit {
+            background: linear-gradient(45deg, #ffecd2, #fcb69f);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        .visit-place {
+            font-weight: 600;
+            color: #e74c3c;
+            margin-bottom: 5px;
+        }
+
+        .visit-places {
+            display: grid;
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .districts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .district-card {
+                padding: 20px;
+            }
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+        <div class="floating-element" style="top: 20%; right: 20%; animation-delay: 1s;"></div>
+        <div class="floating-element" style="bottom: 30%; left: 30%; animation-delay: 2s;"></div>
+        <div class="floating-element" style="bottom: 20%; right: 10%; animation-delay: 3s;"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Discover Karnataka</h1>
+            <p class="subtitle">Explore the Rich Heritage and Diverse Beauty of Karnataka's Districts</p>
+        </header>
+
+        <div class="districts-grid">
+            <!-- Bengaluru District -->
+            <div class="district-card">
+                <h2 class="district-name">Bengaluru</h2>
+                <div class="district-info">
+                    <div class="info-item">
+                        <span class="info-label">Area:</span>
+                        <span class="info-content">2,190 km²</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Taluks:</span>
+                        <div class="taluks">
+                            <span class="taluk-tag">Bengaluru North</span>
+                            <span class="taluk-tag">Bengaluru South</span>
+                            <span class="taluk-tag">Anekal</span>
+                            <span class="taluk-tag">Devanahalli</span>
+                        </div>
+                    </div>
+                    <div class="speciality">
+                        <strong>Speciality:</strong> Silicon Valley of India, IT Hub, Garden City with pleasant climate and cosmopolitan culture
+                    </div>
+                    <div class="cuisine">
+                        <strong>Special Cuisine:</strong> Masala Dosa, Bisi Bele Bath, Mysore Pak, Filter Coffee, Rava Idli
+                    </div>
+                    <div class="must-visit">
+                        <strong>Must Visit Places:</strong>
+                        <div class="visit-places">
+                            <div class="visit-place">• Lalbagh Botanical Garden - Historic garden with rare plants and glasshouse</div>
+                            <div class="visit-place">• Bangalore Palace - Tudor-style palace with beautiful architecture</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mysuru District -->
+            <div class="district-card">
+                <h2 class="district-name">Mysuru</h2>
+                <div class="district-info">
+                    <div class="info-item">
+                        <span class="info-label">Area:</span>
+                        <span class="info-content">6,854 km²</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Taluks:</span>
+                        <div class="taluks">
+                            <span class="taluk-tag">Mysuru</span>
+                            <span class="taluk-tag">Nanjangud</span>
+                            <span class="taluk-tag">T. Narasipura</span>
+                            <span class="taluk-tag">Hunsur</span>
+                            <span class="taluk-tag">Periyapatna</span>
+                            <span class="taluk-tag">Piriyapatna</span>
+                            <span class="taluk-tag">K.R. Nagar</span>
+                        </div>
+                    </div>
+                    <div class="speciality">
+                        <strong>Speciality:</strong> City of Palaces, Yoga Capital, Sandalwood City, Rich cultural heritage and royal history
+                    </div>
+                    <div class="cuisine">
+                        <strong>Special Cuisine:</strong> Mysore Pak, Mysore Masala Dosa, Obbattu, Rasam, Puliyogare
+                    </div>
+                    <div class="must-visit">
+                        <strong>Must Visit Places:</strong>
+                        <div class="visit-places">
+                            <div class="visit-place">• Mysore Palace - Magnificent Indo-Saracenic palace with intricate artwork</div>
+                            <div class="visit-place">• Chamundi Hills - Sacred hill with Chamundeshwari Temple and panoramic views</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mangaluru District -->
+            <div class="district-card">
+                <h2 class="district-name">Dakshina Kannada (Mangaluru)</h2>
+                <div class="district-info">
+                    <div class="info-item">
+                        <span class="info-label">Area:</span>
+                        <span class="info-content">4,559 km²</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Taluks:</span>
+                        <div class="taluks">
+                            <span class="taluk-tag">Mangaluru</span>
+                            <span class="taluk-tag">Bantwal</span>
+                            <span class="taluk-tag">Puttur</span>
+                            <span class="taluk-tag">Sullia</span>
+                            <span class="taluk-tag">Belthangady</span>
+                        </div>
+                    </div>
+                    <div class="speciality">
+                        <strong>Speciality:</strong> Coastal beauty, Major port city, Educational hub, Pristine beaches and backwaters
+                    </div>
+                    <div class="cuisine">
+                        <strong>Special Cuisine:</strong> Mangalorean Fish Curry, Neer Dosa, Kori Rotti, Gassi, Golibaje
+                    </div>
+                    <div class="must-visit">
+                        <strong>Must Visit Places:</strong>
+                        <div class="visit-places">
+                            <div class="visit-place">• Panambur Beach - Popular beach with water sports and sunset views</div>
+                            <div class="visit-place">• St. Aloysius Chapel - Historic chapel with beautiful paintings and architecture</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Udupi District -->
+            <div class="district-card">
+                <h2 class="district-name">Udupi</h2>
+                <div class="district-info">
+                    <div class="info-item">
+                        <span class="info-label">Area:</span>
+                        <span class="info-content">3,575 km²</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Taluks:</span>
+                        <div class="taluks">
+                            <span class="taluk-tag">Udupi</span>
+                            <span class="taluk-tag">Kundapur</span>
+                            <span class="taluk-tag">Karkala</span>
+                        </div>
+                    </div>
+                    <div class="speciality">
+                        <strong>Speciality:</strong> Temple town, Birthplace of Udupi cuisine, Scenic coastal region with pristine beaches
+                    </div>
+                    <div class="cuisine">
+                        <strong>Special Cuisine:</strong> Udupi Sambar, Masala Dosa, Rasam, Payasam, Gulla Bajji
+                    </div>
+                    <div class="must-visit">
+                        <strong>Must Visit Places:</strong>
+                        <div class="visit-places">
+                            <div class="visit-place">• Sri Krishna Temple - Ancient temple famous for its unique worship style</div>
+                            <div class="visit-place">• Malpe Beach - Beautiful beach with water sports and St. Mary's Island nearby</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hampi (Vijayanagara) District -->
+            <div class="district-card">
+                <h2 class="district-name">Vijayanagara (Hampi)</h2>
+                <div class="district-info">
+                    <div class="info-item">
+                        <span class="info-label">Area:</span>
+                        <span class="info-content">6,918 km²</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Taluks:</span>
+                        <div class="taluks">
+                            <span class="taluk-tag">Hosapete</span>
+                            <span class="taluk-tag">Hagaribommanahalli</span>
+                            <span class="taluk-tag">Kottur</span>
+                            <span class="taluk-tag">Kushtagi</span>
+                        </div>
+                    </div>
+                    <div class="speciality">
+                        <strong>Speciality:</strong> UNESCO World Heritage Site, Ancient Vijayanagara Empire ruins, Historical architecture
+                    </div>
+                    <div class="cuisine">
+                        <strong>Special Cuisine:</strong> Jolada Rotti, Shenga Chutney, Yennegai, Mutton Curry, Holige
+                    </div>
+                    <div class="must-visit">
+                        <strong>Must Visit Places:</strong>
+                        <div class="visit-places">
+                            <div class="visit-place">• Hampi Ruins - UNESCO World Heritage Site with magnificent temple complexes</div>
+                            <div class="visit-place">• Vittala Temple - Famous for its stone chariot and musical pillars</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hubli-Dharwad District -->
+            <div class="district-card">
+                <h2 class="district-name">Dharwad</h2>
+                <div class="district-info">
+                    <div class="info-item">
+                        <span class="info-label">Area:</span>
+                        <span class="info-content">4,263 km²</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Taluks:</span>
+                        <div class="taluks">
+                            <span class="taluk-tag">Dharwad</span>
+                            <span class="taluk-tag">Hubli</span>
+                            <span class="taluk-tag">Navalgund</span>
+                            <span class="taluk-tag">Kundgol</span>
+                            <span class="taluk-tag">Kalghatgi</span>
+                        </div>
+                    </div>
+                    <div class="speciality">
+                        <strong>Speciality:</strong> Twin cities, Educational hub, Cultural center, Cotton and textile industry
+                    </div>
+                    <div class="cuisine">
+                        <strong>Special Cuisine:</strong> Dharwad Peda, Karadant, Jolada Rotti, Enne Gai, Benne Dose
+                    </div>
+                    <div class="must-visit">
+                        <strong>Must Visit Places:</strong>
+                        <div class="visit-places">
+                            <div class="visit-place">• Chandramouleshwara Temple - Ancient temple with intricate Chalukyan architecture</div>
+                            <div class="visit-place">• Unkal Lake - Scenic lake perfect for boating and evening walks</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Belgaum District -->
+            <div class="district-card">
+                <h2 class="district-name">Belagavi (Belgaum)</h2>
+                <div class="district-info">
+                    <div class="info-item">
+                        <span class="info-label">Area:</span>
+                        <span class="info-content">13,415 km²</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Taluks:</span>
+                        <div class="taluks">
+                            <span class="taluk-tag">Belagavi</span>
+                            <span class="taluk-tag">Gokak</span>
+                            <span class="taluk-tag">Khanapur</span>
+                            <span class="taluk-tag">Raibag</span>
+                            <span class="taluk-tag">Savadatti</span>
+                            <span class="taluk-tag">Parasgad</span>
+                        </div>
+                    </div>
+                    <div class="speciality">
+                        <strong>Speciality:</strong> Border district, Historical significance, Military cantonment, Jaggery production
+                    </div>
+                    <div class="cuisine">
+                        <strong>Special Cuisine:</strong> Kunda, Mandige, Jolada Rotti, Mutton Curry, Belgaum Burfi
+                    </div>
+                    <div class="must-visit">
+                        <strong>Must Visit Places:</strong>
+                        <div class="visit-places">
+                            <div class="visit-place">• Gokak Falls - Spectacular waterfall known as the 'Niagara of India'</div>
+                            <div class="visit-place">• Belgaum Fort - Historic fort built by Jaya Raya with Masjid inside</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shimoga District -->
+            <div class="district-card">
+                <h2 class="district-name">Shivamogga (Shimoga)</h2>
+                <div class="district-info">
+                    <div class="info-item">
+                        <span class="info-label">Area:</span>
+                        <span class="info-content">8,495 km²</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Taluks:</span>
+                        <div class="taluks">
+                            <span class="taluk-tag">Shivamogga</span>
+                            <span class="taluk-tag">Bhadravati</span>
+                            <span class="taluk-tag">Sagar</span>
+                            <span class="taluk-tag">Sorab</span>
+                            <span class="taluk-tag">Hosanagar</span>
+                            <span class="taluk-tag">Thirthahalli</span>
+                            <span class="taluk-tag">Shikaripura</span>
+                        </div>
+                    </div>
+                    <div class="speciality">
+                        <strong>Speciality:</strong> Gateway to Malnad, Waterfalls, Dense forests, Areca nut and spice cultivation
+                    </div>
+                    <div class="cuisine">
+                        <strong>Special Cuisine:</strong> Akki Rotti, Neer Dosa, Kotte Kadubu, Coconut-based curries, Payasam
+                    </div>
+                    <div class="must-visit">
+                        <strong>Must Visit Places:</strong>
+                        <div class="visit-places">
+                            <div class="visit-place">• Jog Falls - India's second-highest waterfall with four distinct cascades</div>
+                            <div class="visit-place">• Keladi Rameshwara Temple - Historic temple with exquisite Hoysala architecture</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chikmagalur District -->
+            <div class="district-card">
+                <h2 class="district-name">Chikkamagaluru</h2>
+                <div class="district-info">
+                    <div class="info-item">
+                        <span class="info-label">Area:</span>
+                        <span class="info-content">7,201 km²</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Taluks:</span>
+                        <div class="taluks">
+                            <span class="taluk-tag">Chikkamagaluru</span>
+                            <span class="taluk-tag">Kadur</span>
+                            <span class="taluk-tag">Mudigere</span>
+                            <span class="taluk-tag">Kalasa</span>
+                            <span class="taluk-tag">Koppa</span>
+                            <span class="taluk-tag">Narasimharajapura</span>
+                            <span class="taluk-tag">Sringeri</span>
+                        </div>
+                    </div>
+                    <div class="speciality">
+                        <strong>Speciality:</strong> Coffee Land of Karnataka, Hill station, Birthplace of Indian coffee, Scenic Western Ghats
+                    </div>
+                    <div class="cuisine">
+                        <strong>Special Cuisine:</strong> Pandi Curry, Neer Dosa, Kadubu, Filter Coffee, Malnad specialties
+                    </div>
+                    <div class="must-visit">
+                        <strong>Must Visit Places:</strong>
+                        <div class="visit-places">
+                            <div class="visit-place">• Mullayanagiri Peak - Highest peak in Karnataka with breathtaking views</div>
+                            <div class="visit-place">• Hebbe Falls - Spectacular waterfall surrounded by coffee plantations</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hassan District -->
+            <div class="district-card">
+                <h2 class="district-name">Hassan</h2>
+                <div class="district-info">
+                    <div class="info-item">
+                        <span class="info-label">Area:</span>
+                        <span class="info-content">6,826 km²</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Taluks:</span>
+                        <div class="taluks">
+                            <span class="taluk-tag">Hassan</span>
+                            <span class="taluk-tag">Arsikere</span>
+                            <span class="taluk-tag">Belur</span>
+                            <span class="taluk-tag">Channarayapatna</span>
+                            <span class="taluk-tag">Holenarsipura</span>
+                            <span class="taluk-tag">Manjarabad</span>
+                            <span class="taluk-tag">Sakleshpur</span>
+                            <span class="taluk-tag">Alur</span>
+                        </div>
+                    </div>
+                    <div class="speciality">
+                        <strong>Speciality:</strong> Hoysala architecture, Historical temples, Agricultural hub, Arecanut and coffee cultivation
+                    </div>
+                    <div class="cuisine">
+                        <strong>Special Cuisine:</strong> Mysore Pak, Obbattu, Bisi Bele Bath, Ragi Mudde, Ghee Roast
+                    </div>
+                    <div class="must-visit">
+                        <strong>Must Visit Places:</strong>
+                        <div class="visit-places">
+                            <div class="visit-place">• Belur Chennakeshava Temple - Masterpiece of Hoysala architecture with intricate carvings</div>
+                            <div class="visit-place">• Halebidu Hoysaleswara Temple - UNESCO World Heritage Site with exquisite sculptures</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scrolling effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.district-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+
+            // Add click animation to cards
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-10px)';
+                    }, 100);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

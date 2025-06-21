@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Top Sites of Karnataka</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f4e4bc 0%, #e8d5a3 50%, #d4c192 100%);
+      background-attachment: fixed;
+      font-family: 'Cormorant Garamond', serif;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 20% 80%, rgba(139, 94, 60, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(180, 134, 95, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(139, 94, 60, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    header {
+      background: linear-gradient(135deg, #8b5e3c 0%, #a0723f 50%, #7a4f2f 100%);
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      font-family: 'Cinzel', serif;
+      font-size: 3em;
+      font-weight: 700;
+      text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+      position: relative;
+      box-shadow: 0 4px 20px rgba(139, 94, 60, 0.3);
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 2px,
+          rgba(255,255,255,0.1) 2px,
+          rgba(255,255,255,0.1) 4px
+        );
+      pointer-events: none;
+    }
+
+    header h1 {
+      position: relative;
+      z-index: 2;
+      margin: 0;
+      letter-spacing: 3px;
+    }
+
+    .search-container {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 0 30px;
+      position: relative;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 15px 20px;
+      font-size: 1.2em;
+      border: 3px solid #8b5e3c;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.95);
+      font-family: 'Cormorant Garamond', serif;
+      box-shadow: 0 4px 15px rgba(139, 94, 60, 0.2);
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .search-box:focus {
+      border-color: #a0723f;
+      box-shadow: 0 6px 25px rgba(139, 94, 60, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .search-box::placeholder {
+      color: #8b5e3c;
+      opacity: 0.7;
+    }
+
+    .search-results {
+      position: absolute;
+      top: 100%;
+      left: 30px;
+      right: 30px;
+      background: white;
+      border: 2px solid #8b5e3c;
+      border-top: none;
+      border-radius: 0 0 15px 15px;
+      max-height: 200px;
+      overflow-y: auto;
+      z-index: 1000;
+      display: none;
+      box-shadow: 0 4px 15px rgba(139, 94, 60, 0.2);
+    }
+
+    .search-result-item {
+      padding: 12px 20px;
+      cursor: pointer;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 1.1em;
+      color: #5a3e36;
+      transition: all 0.2s ease;
+    }
+
+    .search-result-item:hover {
+      background: linear-gradient(135deg, #f6f0e7 0%, #f0e6d2 100%);
+      color: #8b5e3c;
+      font-weight: 500;
+    }
+
+    .search-result-item:last-child {
+      border-bottom: none;
+    }
+
+    .sites-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 40px 30px;
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    .site-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(246,240,231,0.95) 100%);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 
+        0 10px 30px rgba(139, 94, 60, 0.15),
+        0 4px 15px rgba(139, 94, 60, 0.1);
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(139, 94, 60, 0.1);
+    }
+
+    .site-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(circle, rgba(139, 94, 60, 0.05) 0%, transparent 70%);
+      transition: all 0.4s ease;
+      transform: scale(0);
+    }
+
+    .site-card:hover::before {
+      transform: scale(1);
+    }
+
+    .site-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 
+        0 20px 40px rgba(139, 94, 60, 0.25),
+        0 10px 25px rgba(139, 94, 60, 0.15);
+      border-color: rgba(139, 94, 60, 0.3);
+    }
+
+    .site-card img {
+      max-width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 15px;
+      transition: all 0.4s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 2;
+    }
+
+    .site-card:hover img {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    .site-card h3 {
+      margin: 20px 0 15px 0;
+      color: #5a3e36;
+      font-family: 'Cinzel', serif;
+      font-size: 1.5em;
+      font-weight: 600;
+      letter-spacing: 1px;
+      position: relative;
+      z-index: 2;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .site-card a {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 25px;
+      background: linear-gradient(135deg, #8b5e3c 0%, #a0723f 50%, #7a4f2f 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1em;
+      font-weight: 500;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(139, 94, 60, 0.3);
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    .site-card a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .site-card a:hover::before {
+      left: 100%;
+    }
+
+    .site-card a:hover {
+      background: linear-gradient(135deg, #704214 0%, #8b5e3c 50%, #5a3e36 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(139, 94, 60, 0.4);
+    }
+
+    .decorative-border {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background: linear-gradient(90deg, #8b5e3c, #a0723f, #b4865f, #a0723f, #8b5e3c);
+      z-index: 1001;
+    }
+
+    .decorative-border-bottom {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background: linear-gradient(90deg, #8b5e3c, #a0723f, #b4865f, #a0723f, #8b5e3c);
+      z-index: 1001;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        font-size: 2em;
+        padding: 30px 15px;
+      }
+      
+      .sites-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 30px 15px;
+      }
+      
+      .search-container {
+        padding: 0 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="decorative-border"></div>
+  <div class="decorative-border-bottom"></div>
+
+  <header>
+    <h1>Top Sites of Karnataka</h1>
+  </header>
+
+  <div class="search-container">
+    <input 
+      type="text" 
+      class="search-box" 
+      placeholder="Search for Karnataka's historic destinations..."
+      id="searchInput"
+    >
+    <div class="search-results" id="searchResults"></div>
+  </div>
+
+  <div class="sites-container">
+    <div class="site-card" data-name="hampi">
+      <img src="topimages/hampi.png" alt="Hampi">
+      <h3>Hampi</h3>
+      <a href="topsites/hampi.html">View Details</a>
+    </div>
+
+    <div class="site-card" data-name="badami">
+      <img src="topimages/badami.png" alt="Badami">
+      <h3>Badami</h3>
+      <a href="topsites/badami.html">View Details</a>
+    </div>
+
+    <div class="site-card" data-name="aihole">
+      <img src="topimages/aihole.png" alt="Aihole">
+      <h3>Aihole</h3>
+      <a href="topsites/aihole.html">View Details</a>
+    </div>
+
+    <div class="site-card" data-name="pattadakallu">
+      <img src="topimages/pattadakallu.png" alt="Pattadakallu">
+      <h3>Pattadakallu</h3>
+      <a href="topsites/pattadakallu.html">View Details</a>
+    </div>
+
+    <div class="site-card" data-name="halebeedu">
+      <img src="topimages/halebeedu.png" alt="Halebeedu">
+      <h3>Halebeedu</h3>
+      <a href="topsites/halebeedu.html">View Details</a>
+    </div>
+
+    <div class="site-card" data-name="jogfalls">
+      <img src="topimages/jogfalls.png" alt="Jog Falls">
+      <h3>Jog Falls</h3>
+      <a href="topsites/jogfalls.html">View Details</a>
+    </div>
+
+    <div class="site-card" data-name="mysuru">
+      <img src="topimages/mysuru.png" alt="Mysuru">
+      <h3>Mysuru</h3>
+      <a href="topsites/mysuru.html">View Details</a>
+    </div>
+
+    <div class="site-card" data-name="coorg">
+      <img src="topimages/coorg.png" alt="Coorg">
+      <h3>Coorg</h3>
+      <a href="topsites/coorg.html">View Details</a>
+    </div>
+
+    <div class="site-card" data-name="sringeri">
+      <img src="topimages/sringeri.png" alt="Sringeri">
+      <h3>Sringeri</h3>
+      <a href="topsites/sringeri.html">View Details</a>
+    </div>
+
+    <div class="site-card" data-name="bandipur">
+      <img src="topimages/bandipur.png" alt="Bandipur">
+      <h3>Bandipur</h3>
+      <a href="topsites/bandipur.html">View Details</a>
+    </div>
+
+    <div class="site-card" data-name="nagarhole">
+      <img src="topimages/nagarhole.png" alt="Nagarahole">
+      <h3>Nagarahole</h3>
+      <a href="topsites/nagarahole.html">View Details</a>
+    </div>
+
+    <div class="site-card" data-name="murudeshwara">
+      <img src="topimages/murudeshwara.png" alt="Murudeshwar">
+      <h3>Murudeshwar</h3>
+      <a href="topsites/murudeshwara.html">View Details</a>
+    </div>
+
+    <div class="site-card" data-name="gokarna">
+      <img src="topimages/gokarna.png" alt="Gokarna">
+      <h3>Gokarna</h3>
+      <a href="topsites/gokarna.html">View Details</a>
+    </div>
+  </div>
+
+  <script>
+    const sites = [
+      { name: 'Hampi', url: 'topsites/hampi.html' },
+      { name: 'Badami', url: 'topsites/badami.html' },
+      { name: 'Aihole', url: 'topsites/aihole.html' },
+      { name: 'Pattadakallu', url: 'topsites/pattadakallu.html' },
+      { name: 'Halebeedu', url: 'topsites/halebeedu.html' },
+      { name: 'Jog Falls', url: 'topsites/jogfalls.html' },
+      { name: 'Mysuru', url: 'topsites/mysuru.html' },
+      { name: 'Coorg', url: 'topsites/coorg.html' },
+      { name: 'Sringeri', url: 'topsites/sringeri.html' },
+      { name: 'Bandipur', url: 'topsites/bandipur.html' },
+      { name: 'Nagarahole', url: 'topsites/nagarahole.html' },
+      { name: 'Murudeshwar', url: 'topsites/murudeshwara.html' },
+      { name: 'Gokarna', url: 'topsites/gokarna.html' }
+    ];
+
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+
+    searchInput.addEventListener('input', function() {
+      const query = this.value.toLowerCase().trim();
+      
+      if (query === '') {
+        searchResults.style.display = 'none';
+        return;
+      }
+
+      const filteredSites = sites.filter(site => 
+        site.name.toLowerCase().includes(query)
+      );
+
+      if (filteredSites.length > 0) {
+        searchResults.innerHTML = filteredSites.map(site => 
+          `<div class="search-result-item" data-url="${site.url}">${site.name}</div>`
+        ).join('');
+        searchResults.style.display = 'block';
+      } else {
+        searchResults.style.display = 'none';
+      }
+    });
+
+    searchResults.addEventListener('click', function(e) {
+      if (e.target.classList.contains('search-result-item')) {
+        const url = e.target.getAttribute('data-url');
+        window.location.href = url;
+      }
+    });
+
+    searchInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        const query = this.value.toLowerCase().trim();
+        const matchedSite = sites.find(site => 
+          site.name.toLowerCase() === query || 
+          site.name.toLowerCase().includes(query)
+        );
+        
+        if (matchedSite) {
+          window.location.href = matchedSite.url;
+        }
+      }
+    });
+
+    // Hide search results when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+        searchResults.style.display = 'none';
+      }
+    });
+
+    // Show search results when focusing on input
+    searchInput.addEventListener('focus', function() {
+      if (this.value.trim() !== '' && searchResults.innerHTML !== '') {
+        searchResults.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

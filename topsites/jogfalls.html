@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jog Falls - Majestic Waterfall</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lora:wght@400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Lora', serif;
+            background: linear-gradient(45deg, #1e3c72 0%, #2a5298 25%, #4682b4 50%, #1e3c72 75%, #2a5298 100%);
+            background-size: 400% 400%;
+            animation: waterfallGradient 18s ease infinite;
+            margin: 0;
+            padding: 0;
+            color: #2e2e2e;
+            overflow-x: hidden;
+        }
+        
+        @keyframes waterfallGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            opacity: 0.15;
+        }
+        
+        .particle {
+            position: absolute;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><ellipse cx="50" cy="30" rx="8" ry="20" fill="%234682B4"/><ellipse cx="50" cy="60" rx="6" ry="15" fill="%235F9EA0"/><ellipse cx="50" cy="85" rx="4" ry="10" fill="%2387CEEB"/></svg>');
+            background-size: contain;
+            width: 25px;
+            height: 45px;
+            animation: waterdropFloat 20s infinite linear;
+        }
+        
+        @keyframes waterdropFloat {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh) rotate(20deg); opacity: 0; }
+        }
+        
+        header {
+            position: relative;
+            background-image: url('../bgimages/jogfalls1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(30, 60, 114, 0.4) 0%, transparent 70%);
+            animation: mistPulse 6s ease-in-out infinite;
+        }
+        
+        @keyframes mistPulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+        
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5em, 8vw, 5em);
+            margin: 0;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(70,130,180,0.6);
+            position: relative;
+            z-index: 10;
+            color: #E6F3FF;
+            letter-spacing: 2px;
+        }
+        
+        header p {
+            font-size: 1.4em;
+            margin-top: 20px;
+            font-weight: 400;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+            position: relative;
+            z-index: 10;
+            color: #87CEEB;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+            font-style: italic;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        nav {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            border-top: 3px solid #4682b4;
+            border-bottom: 3px solid #4682b4;
+            display: flex;
+            justify-content: center;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(30, 60, 114, 0.4);
+        }
+        
+        nav a {
+            color: #E6F3FF;
+            margin: 0 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+        
+        nav a::before {
+            content: '💧';
+            position: relative;
+            margin-right: 8px;
+            font-size: 0.8em;
+        }
+        
+        nav a:hover {
+            color: #87CEEB;
+            background: rgba(70, 130, 180, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        section {
+            padding: 80px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        section::before {
+            content: '💧 🌊 💧';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            letter-spacing: 20px;
+        }
+        
+        #heritage {
+            background: linear-gradient(145deg, rgba(230, 243, 255, 0.95), rgba(70, 130, 180, 0.95));
+            border: 2px solid #4682b4;
+            border-radius: 15px;
+            margin: 40px auto;
+            box-shadow: 0 10px 30px rgba(30, 60, 114, 0.2), inset 0 1px 0 rgba(255,255,255,0.6);
+            position: relative;
+        }
+        
+        #heritage::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #4682b4, #2a5298, #87CEEB, #4682b4);
+            border-radius: 17px;
+            z-index: -1;
+        }
+        
+        #places-to-see {
+            background: linear-gradient(145deg, rgba(70, 130, 180, 0.95), rgba(230, 243, 255, 0.95));
+            border: 2px solid #2a5298;
+            border-radius: 15px;
+            margin: 40px auto;
+            box-shadow: 0 10px 30px rgba(30, 60, 114, 0.2), inset 0 1px 0 rgba(255,255,255,0.6);
+            position: relative;
+        }
+        
+        #places-to-see::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #2a5298, #4682b4, #87CEEB, #2a5298);
+            border-radius: 17px;
+            z-index: -1;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: #1e3c72;
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(30, 60, 114, 0.3);
+        }
+        
+        h2::before {
+            content: '🌊 💧 🌊';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+            letter-spacing: 10px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #4682b4, #87CEEB, #4682b4, transparent);
+            border-radius: 2px;
+        }
+        
+        #heritage p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+        
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .card {
+            background: linear-gradient(145deg, rgba(230, 243, 255, 0.98), rgba(70, 130, 180, 0.98));
+            border: 2px solid #4682b4;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(30, 60, 114, 0.15), inset 0 1px 0 rgba(255,255,255,0.8);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid rgba(70, 130, 180, 0.3);
+            border-radius: 8px;
+            pointer-events: none;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(30, 60, 114, 0.25), inset 0 1px 0 rgba(255,255,255,0.9);
+            border-color: #2a5298;
+        }
+        
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            margin-top: 0;
+            color: #1e3c72;
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-align: center;
+            border-bottom: 2px solid #4682b4;
+            padding-bottom: 10px;
+        }
+        
+        .card h3::before {
+            content: '💧 ';
+            margin-right: 8px;
+        }
+        
+        .card p {
+            color: #2d4f72;
+            line-height: 1.7;
+            font-size: 1.1em;
+            font-weight: 400;
+            text-align: justify;
+        }
+        
+        .learn-options {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .learn-options a {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #E6F3FF;
+            border: 2px solid #4682b4;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+        }
+        
+        .learn-options a::before {
+            content: '💧 ';
+            margin-right: 8px;
+        }
+        
+        .learn-options a:hover {
+            background: linear-gradient(135deg, #2a5298, #4682b4);
+            color: #87CEEB;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+            border-color: #87CEEB;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            border-top: 3px solid #4682b4;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 14px;
+            color: #E6F3FF;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '💧 🌊 🏞️ 🌊 💧';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            letter-spacing: 15px;
+        }
+        
+        footer p {
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+        
+        #directions-button {
+            background: linear-gradient(135deg, #4682b4, #2a5298);
+            color: #1e3c72;
+            padding: 15px 35px;
+            text-decoration: none;
+            border: 2px solid #1e3c72;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            box-shadow: 0 6px 20px rgba(70, 130, 180, 0.3);
+        }
+        
+        #directions-button::before {
+            content: '🧭 ';
+            margin-right: 8px;
+        }
+        
+        #directions-button:hover {
+            background: linear-gradient(135deg, #87CEEB, #4682b4);
+            text-decoration: none;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(70, 130, 180, 0.4);
+            border-color: #2a5298;
+        }
+        
+        @media (max-width: 768px) {
+            .card-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            header {
+                padding: 80px 20px;
+            }
+            
+            section {
+                padding: 50px 20px;
+            }
+            
+            h2 {
+                font-size: 2.2em;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav a {
+                margin: 5px 15px;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <div class="bg-animation" id="bg-animation"></div>
+
+    <header>
+        <h1>Welcome to Jog Falls</h1>
+        <p>India's Second Highest Waterfall - Nature's Spectacular Display</p>
+    </header>
+
+    <nav>
+    </nav>
+    
+    <section id="heritage">
+        <h2>Natural Wonder</h2>
+        <p>
+            Jog Falls, also known as Gerosoppa Falls or Joga Falls, is a magnificent waterfall located in the Western Ghats of Karnataka. Standing at a breathtaking height of 253 meters (830 feet), it ranks as India's second-highest plunge waterfall and one of the most spectacular natural wonders in the country. Created by the Sharavathi River taking a dramatic plunge over the rocky cliffs, Jog Falls is renowned for its four distinct cascades: Raja, Rani, Rover, and Rocket. During the monsoon season, the falls transform into a thunderous spectacle of nature's raw power, with millions of gallons of water cascading down the precipice, creating a mesmerizing mist that can be seen from miles away. The surrounding tropical rainforest and biodiversity make it a paradise for nature lovers and photographers.
+        </p>
+        <div class="learn-options">
+            <a href="https://en.wikipedia.org/wiki/Jog_Falls" target="_blank">Read more on Wikipedia</a>
+        </div>
+    </section>
+
+    <section id="places-to-see">
+        <h2>Places to Explore</h2>
+        <div class="card-container">
+            <div class="card">
+                <h3>Main Waterfall Viewpoint</h3>
+                <p>The primary viewing platform offering spectacular panoramic views of all four cascades. Best visited during monsoon when the falls are at their most powerful and magnificent.</p>
+            </div>
+            <div class="card">
+                <h3>Sharavathi Valley</h3>
+                <p>The lush green valley surrounding the falls, perfect for nature walks and wildlife spotting. Home to diverse flora and fauna typical of the Western Ghats ecosystem.</p>
+            </div>
+            <div class="card">
+                <h3>Linganamakki Dam</h3>
+                <p>The upstream dam that controls the water flow to Jog Falls. During peak monsoon, the dam releases excess water, creating the spectacular cascade that attracts thousands of visitors.</p>
+            </div>
+            <div class="card">
+                <h3>Tunga Anicut Dam</h3>
+                <p>A historic dam built across the Tunga River, offering scenic views and engineering marvels. It's an important irrigation project that supports agriculture in the region.</p>
+            </div>
+            <div class="card">
+                <h3>Ikkeri</h3>
+                <p>A nearby historical town featuring ancient Keladi Nayaka architecture, including temples and palaces that showcase the region's rich cultural heritage and artistic traditions.</p>
+            </div>
+            <div class="card">
+                <h3>Sakrebailu Elephant Camp</h3>
+                <p>A nearby elephant training camp where visitors can observe and interact with elephants in their natural habitat, offering unique wildlife experiences and conservation insights.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Jog Falls Tourism. Experience Nature's Grandeur.</p>
+        <div class="learn-options">
+            <a href="#" id="directions-button">Directions</a>
+        </div>
+    </footer>
+
+    <script>
+        function createParticles() {
+            const bgAnimation = document.getElementById('bg-animation');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 8 + 15) + 's';
+                bgAnimation.appendChild(particle);
+            }
+        }
+        
+        createParticles();
+        
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        document.getElementById('directions-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const userLat = position.coords.latitude;
+                    const userLng = position.coords.longitude;
+                    
+                    const jogfallsLat = 14.2269;
+                    const jogfallsLng = 74.8150;
+                    
+                    const directionsUrl = `https://www.google.com/maps/dir/${userLat},${userLng}/${jogfallsLat},${jogfallsLng}/@${(userLat + jogfallsLat)/2},${(userLng + jogfallsLng)/2},10z/data=!3m1!4b1!4m2!4m1!3e0`;
+                    
+                    window.open(directionsUrl, '_blank');
+                }, function(error) {
+                    const searchUrl = `https://www.google.com/maps/place/Jog+Falls,+Karnataka,+India/@14.2269,74.8150,15z`;
+                    window.open(searchUrl, '_blank');
+                });
+            } else {
+                const searchUrl = `https://www.google.com/maps/place/Jog+Falls,+Karnataka,+India/@14.2269,74.8150,15z`;
+                window.open(searchUrl, '_blank');
+            }
+        });
+        
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('header');
+            if (header) {
+                header.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            observer.observe(card);
+        });
+    </script>
+
+</body>
+</html>

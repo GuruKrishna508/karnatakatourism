@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jnanapeetha - Discover Karnataka</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo h1 {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            margin: 40px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .poets-grid {
+            max-width: 1400px;
+            margin: 80px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
+        }
+
+        .poet-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .poet-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .poet-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            object-position: center top;
+            transition: transform 0.4s ease;
+            border-bottom: 3px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .poet-card:hover .poet-image {
+            transform: scale(1.05);
+        }
+
+        .poet-info {
+            padding: 30px;
+            position: relative;
+        }
+
+        .poet-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .poet-year {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .poet-description {
+            color: #555;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .award-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
+            z-index: 10;
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+        }
+
+        .footer h3 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .footer p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .poets-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .poet-card {
+                margin: 0 10px;
+            }
+
+            .poet-image {
+                height: 350px;
+            }
+
+            .award-badge {
+                top: 15px;
+                right: 15px;
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-book {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-book:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-book:nth-child(2) { top: 60%; right: 10%; animation-delay: 2s; }
+        .floating-book:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-book"></div>
+        <div class="floating-book"></div>
+        <div class="floating-book"></div>
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>Discover Karnataka</h1>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>ಜ್ಞಾನಪೀಠ ಪುರಸ್ಕಾರ</h1>
+        <p>Celebrating Karnataka's Literary Giants - Eight distinguished writers who brought glory to Kannada literature through their exceptional contributions, earning India's highest literary honor, the Jnanapeetha Award.</p>
+    </section>
+
+    <section class="poets-grid">
+        <div class="poet-card">
+            <div class="award-badge">1967</div>
+            <img src="jnanaimages/kuvempu.jpg" alt="Kuvempu" class="poet-image">
+            <div class="poet-info">
+                <h3 class="poet-name">Kuvempu</h3>
+                <p class="poet-year">(1904-1994)</p>
+                <p class="poet-description">Kuppali Venkatappagowda Puttappa, known as Kuvempu, was a pioneering figure in modern Kannada literature. His epic poem "Sri Ramayana Darshanam" and philosophy of "Vishva Manava" (Universal Humanism) continue to inspire generations. He was the first Kannada writer to receive the Jnanapeetha Award.</p>
+            </div>
+        </div>
+
+        <div class="poet-card">
+            <div class="award-badge">1973</div>
+            <img src="jnanaimages/bendre.jpg" alt="Dattatreya Ramachandra Bendre" class="poet-image">
+            <div class="poet-info">
+                <h3 class="poet-name">Dattatreya Ramachandra Bendre</h3>
+                <p class="poet-year">(1896-1981)</p>
+                <p class="poet-description">Known as "Daamodara Muni," Bendre was a master of lyrical poetry who brought new dimensions to Kannada verse. His works like "Gari" and "Sakhigalu" showcase his deep understanding of human emotions and nature's beauty, establishing him as a cornerstone of modern Kannada poetry.</p>
+            </div>
+        </div>
+
+        <div class="poet-card">
+            <div class="award-badge">1977</div>
+            <img src="jnanaimages/masti.jpg" alt="Masti Venkatesha Iyengar" class="poet-image">
+            <div class="poet-info">
+                <h3 class="poet-name">Masti Venkatesha Iyengar</h3>
+                <p class="poet-year">(1891-1986)</p>
+                <p class="poet-description">Masti was a prolific writer who excelled in multiple genres including short stories, novels, and essays. His psychological insights and realistic portrayal of human nature in works like "Chikaveera Rajendra" and "Subbanna" made him a celebrated figure in Kannada literature.</p>
+            </div>
+        </div>
+
+        <div class="poet-card">
+            <div class="award-badge">1977</div>
+            <img src="jnanaimages/vkgokak.jpg" alt="V.K. Gokak" class="poet-image">
+            <div class="poet-info">
+                <h3 class="poet-name">V.K. Gokak</h3>
+                <p class="poet-year">(1909-1992)</p>
+                <p class="poet-description">Vinayaka Krishna Gokak was a versatile writer, critic, and academic who contributed significantly to Kannada literature. His epic "Bharatha Sindhu Rashmi" and numerous other works demonstrate his mastery over both traditional and modern literary forms.</p>
+            </div>
+        </div>
+
+        <div class="poet-card">
+            <div class="award-badge">1994</div>
+            <img src="jnanaimages/anathmurthy.jpeg" alt="U.R. Ananthamurthy" class="poet-image">
+            <div class="poet-info">
+                <h3 class="poet-name">U.R. Ananthamurthy</h3>
+                <p class="poet-year">(1932-2014)</p>
+                <p class="poet-description">Udupi Rajagopalacharya Ananthamurthy was a prominent voice in contemporary Indian literature. His novel "Samskara" revolutionized Kannada literature and was adapted into an acclaimed film. His works explore the conflict between tradition and modernity in Indian society.</p>
+            </div>
+        </div>
+
+        <div class="poet-card">
+            <div class="award-badge">1998</div>
+            <img src="jnanaimages/girishkarnad.jpeg" alt="Girish Karnad" class="poet-image">
+            <div class="poet-info">
+                <h3 class="poet-name">Girish Karnad</h3>
+                <p class="poet-year">(1938-2019)</p>
+                <p class="poet-description">Girish Karnad was a multifaceted personality - playwright, actor, director, and writer. His plays like "Tughlaq," "Hayavadana," and "Nagamandala" brought Indian theatre to international prominence. He successfully bridged the gap between traditional Indian theatre and contemporary concerns.</p>
+            </div>
+        </div>
+
+        <div class="poet-card">
+            <div class="award-badge">2006</div>
+            <img src="jnanaimages/karanth.jpg" alt="Shivarama Karanth" class="poet-image">
+            <div class="poet-info">
+                <h3 class="poet-name">Shivarama Karanth</h3>
+                <p class="poet-year">(1902-1997)</p>
+                <p class="poet-description">Kota Shivarama Karanth was not just a writer but a cultural activist, environmentalist, and social reformer. His novels like "Chomana Dudi" and "Marali Mannige" reflect his deep concern for social issues and his love for nature and culture.</p>
+            </div>
+        </div>
+
+        <div class="poet-card">
+            <div class="award-badge">2010</div>
+            <img src="jnanaimages/kambar.jpg" alt="Chandrashekhara Kambar" class="poet-image">
+            <div class="poet-info">
+                <h3 class="poet-name">Chandrashekhara Kambar</h3>
+                <p class="poet-year">(1937-present)</p>
+                <p class="poet-description">Chandrashekhara Kambar is a contemporary poet and playwright who has enriched Kannada literature with his innovative works. His plays and poetry collections demonstrate his mastery over language and his deep understanding of human psychology and social dynamics.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <h3>Literary Heritage of Karnataka</h3>
+        <p>Karnataka's rich literary tradition continues to flourish through these magnificent writers who have brought honor to Kannada literature on the national stage. Their works remain timeless treasures that inspire readers across generations.</p>
+    </footer>
+
+    <script>
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.poet-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Add parallax effect to floating elements
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const floatingBooks = document.querySelectorAll('.floating-book');
+            
+            floatingBooks.forEach((book, index) => {
+                const speed = 0.5 + (index * 0.2);
+                book.style.transform = `translateY(${scrollY * speed}px) rotate(${scrollY * 0.5}deg)`;
+            });
+        });
+    </script>
+</body>
+</html>

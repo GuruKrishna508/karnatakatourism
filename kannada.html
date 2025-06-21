@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಕನ್ನಡ - Kannada Heritage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Noto Sans Kannada', serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            color: #d35400;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            color: #8e44ad;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #34495e;
+            font-style: italic;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 30px 0;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            border-bottom: 4px solid #e74c3c;
+            padding-bottom: 15px;
+            display: inline-block;
+        }
+
+        .kannada-title {
+            font-size: 2rem;
+            color: #8e44ad;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .text-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .image-container {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            box-shadow: inset 5px 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .heritage-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .heritage-image:hover {
+            transform: scale(1.05);
+        }
+
+        .image-caption {
+            margin-top: 15px;
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffeaa7 0%, #fab1a0 100%);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .fact-box {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .fact-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .symbols-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .symbol-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .symbol-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .symbol-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            background: linear-gradient(135deg, #fd79a8, #fdcb6e);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+
+        .timeline-date {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .section {
+                padding: 25px;
+            }
+            
+            .symbols-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element" style="top: 10%; left: 10%; font-size: 4rem; color: #e74c3c;">ಕ</div>
+        <div class="floating-element" style="top: 60%; right: 15%; font-size: 3rem; color: #8e44ad;">ನ್ನ</div>
+        <div class="floating-element" style="bottom: 20%; left: 20%; font-size: 2.5rem; color: #3498db;">ಡ</div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1 class="main-title">ಕನ್ನಡ</h1>
+            <h2 class="subtitle">Kannada - The Language of Karnataka</h2>
+            <p class="tagline">"ಕನ್ನಡ ನಾಡು ನುಡಿಯ ಗೆಲೆಯ ನಾಡು" - The land where Kannada language reigns supreme</p>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title">ಕನ್ನಡದ ಇತಿಹಾಸ - History of Kannada</h2>
+            <div class="content-grid">
+                <div class="text-content">
+                    <p>Kannada is one of the <span class="highlight">oldest languages in India</span>, with a literary tradition spanning over <span class="highlight">1,500 years</span>. It belongs to the Dravidian family of languages and is the official language of Karnataka state.</p>
+                    
+                    <p>The language has evolved through several stages:</p>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">450-1200 CE</div>
+                            <div>Old Kannada (Haḷegannaḍa) - The earliest form found in inscriptions</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">1200-1700 CE</div>
+                            <div>Middle Kannada (Naḍugannaḍa) - Classical literary period</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">1700-Present</div>
+                            <div>Modern Kannada (Hosagannaḍa) - Contemporary form</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="image-container">
+                    <div class="fact-box">
+                        <div class="fact-title">ಅದ್ಭುತ ಸಂಗತಿಗಳು - Amazing Facts</div>
+                        <ul style="text-align: left; line-height: 1.8;">
+                            <li>Over <strong>44 million</strong> native speakers worldwide</li>
+                            <li><strong>29th most spoken</strong> language in the world</li>
+                            <li>Official language of <strong>Karnataka state</strong></li>
+                            <li>Classical language status since <strong>2008</strong></li>
+                            <li>Rich literary heritage with <strong>8 Jnanpith Awards</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">ಹಳ್ಮಿಡಿ ಶಾಸನ - Halmidi Inscription</h2>
+            <div class="kannada-title">ಕನ್ನಡದ ಪ್ರಾಚೀನ ಸಾಕ್ಷಿ</div>
+            <div class="content-grid">
+                <div class="text-content">
+                    <p>The <span class="highlight">Halmidi Inscription</span> is one of the earliest known inscriptions in the Kannada language, dating back to approximately <span class="highlight">450 CE</span>. This ancient stone inscription was discovered in Halmidi village in the Hassan district of Karnataka.</p>
+                    
+                    <p>This remarkable archaeological find provides crucial evidence of the antiquity of the Kannada script and language. The inscription is written in the pre-old Kannada script and contains references to land grants and administrative details of the time.</p>
+                    
+                    <div class="fact-box">
+                        <div class="fact-title">Significance of Halmidi Inscription</div>
+                        <p>• Oldest known Kannada inscription<br>
+                        • Written in 5th century CE<br>
+                        • Contains 6 lines of ancient Kannada<br>
+                        • Mentions King Kakusthavarma<br>
+                        • Preserved in Government Museum, Bangalore</p>
+                    </div>
+                </div>
+                
+                <div class="image-container">
+                    <img src="kannadaimages/halmidi.png" alt="Halmidi Inscription" class="heritage-image">
+                    <div class="image-caption">
+                        <strong>ಹಳ್ಮಿಡಿ ಶಾಸನ</strong><br>
+                        The ancient Halmidi Inscription - Testament to Kannada's antiquity
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">ಕರ್ನಾಟಕದ ಚಿಹ್ನೆಗಳು - Symbols of Karnataka</h2>
+            <div class="kannada-title">ನಮ್ಮ ಹೆಮ್ಮೆಯ ಗುರುತುಗಳು</div>
+            
+            <div class="symbols-grid">
+                <div class="symbol-card">
+                    <h3 class="symbol-title">ಕರ್ನಾಟಕ ನಕ್ಷೆ - Karnataka Map</h3>
+                    <div class="image-container">
+                        <img src="kannadaimages/map.png" alt="Karnataka Map" class="heritage-image">
+                        <div class="image-caption">
+                            Geographic boundaries of Karnataka state<br>
+                            <strong>Area:</strong> 1,91,791 sq km<br>
+                            <strong>Capital:</strong> Bengaluru
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="symbol-card">
+                    <h3 class="symbol-title">ರಾಜ್ಯ ಚಿಹ್ನೆ - State Emblem</h3>
+                    <div class="image-container">
+                        <img src="kannadaimages/emblem.png" alt="Karnataka State Emblem" class="heritage-image">
+                        <div class="image-caption">
+                            Official emblem of Karnataka<br>
+                            Features the <strong>Gandaberunda</strong><br>
+                            (Two-headed mythical bird)
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="symbol-card">
+                    <h3 class="symbol-title">ರಾಜ್ಯ ಧ್ವಜ - State Flag</h3>
+                    <div class="image-container">
+                        <img src="kannadaimages/flag.png" alt="Karnataka State Flag" class="heritage-image">
+                        <div class="image-caption">
+                            Karnataka state flag<br>
+                            <strong>Colors:</strong> Yellow and Red<br>
+                            Symbol of Karnataka's pride and identity
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title full-width">ಕನ್ನಡದ ವೈಭವ - Glory of Kannada</h2>
+            <div class="content-grid">
+                <div class="text-content">
+                    <h3 class="kannada-title">ಸಾಹಿತ್ಯ ಸಂಪದ - Literary Heritage</h3>
+                    <p>Kannada literature boasts a rich tradition with works like <span class="highlight">Kavirajamarga</span> (850 CE), the earliest available work on rhetoric and poetics in Kannada. The language has produced legendary poets like Pampa, Ranna, and Ponna, known as the <span class="highlight">"Ratnatraya"</span> (Three Gems) of Kannada literature.</p>
+                    
+                    <h3 class="kannada-title">ಜ್ಞಾನಪೀಠ ಪುರಸ್ಕಾರ - Jnanpith Awards</h3>
+                    <p>Kannada literature has been honored with <span class="highlight">8 Jnanpith Awards</span>, India's highest literary honor, making it one of the most celebrated regional literatures in the country.</p>
+                </div>
+                
+                <div class="text-content">
+                    <h3 class="kannada-title">ಭಾಷೆಯ ವಿಶಿಷ್ಟತೆ - Language Features</h3>
+                    <p>Kannada script, derived from the Brahmi script, has <span class="highlight">49 characters</span> - 13 vowels and 36 consonants. The language is known for its phonetic nature, where words are pronounced exactly as they are written.</p>
+                    
+                    <div class="fact-box">
+                        <div class="fact-title">ಭಾಷಾ ಸಂಖ್ಯಾಶಾಸ್ತ್ರ - Language Statistics</div>
+                        <p>• 44+ million native speakers<br>
+                        • 15+ million second-language speakers<br>
+                        • Spoken in Karnataka, Goa, Tamil Nadu, Andhra Pradesh<br>
+                        • Official language of Karnataka since 1956<br>
+                        • Classical language status since 2008</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="section">
+            <div style="text-align: center;">
+                <h2 class="kannada-title">ಕನ್ನಡ ನಮ್ಮ ಹೆಮ್ಮೆ</h2>
+                <p style="font-size: 1.2rem; color: #34495e; font-style: italic;">
+                    "Kannada is our pride - A language that connects the past with the present, tradition with modernity."
+                </p>
+                <div style="margin-top: 20px; font-size: 2rem; color: #e74c3c;">
+                    ಜೈ ಕರ್ನಾಟಕ ಮಾತೆ! 🚩
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Add floating animation to elements on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                
+                if (isVisible) {
+                    section.style.animation = `fadeInUp 0.8s ease-out ${index * 0.1}s both`;
+                }
+            });
+        });
+
+        // Add hover effects to images
+        document.querySelectorAll('.heritage-image').forEach(img => {
+            img.addEventListener('mouseenter', () => {
+                img.style.filter = 'brightness(1.1) contrast(1.1)';
+            });
+            
+            img.addEventListener('mouseleave', () => {
+                img.style.filter = 'brightness(1) contrast(1)';
+            });
+        });
+
+        // Create dynamic background elements
+        function createFloatingKannada() {
+            const kannadaChars = ['ಕ', 'ನ್ನ', 'ಡ', 'ರ', 'ಜ', 'ಯ', 'ಸ', 'ಹ', 'ಲ', 'ಮ'];
+            const colors = ['#e74c3c', '#8e44ad', '#3498db', '#f39c12', '#27ae60'];
+            
+            setInterval(() => {
+                const char = document.createElement('div');
+                char.className = 'floating-element';
+                char.textContent = kannadaChars[Math.floor(Math.random() * kannadaChars.length)];
+                char.style.left = Math.random() * 100 + '%';
+                char.style.top = '-50px';
+                char.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+                char.style.color = colors[Math.floor(Math.random() * colors.length)];
+                char.style.opacity = '0.1';
+                char.style.animation = `float ${Math.random() * 3 + 4}s linear`;
+                
+                document.querySelector('.floating-elements').appendChild(char);
+                
+                setTimeout(() => {
+                    char.remove();
+                }, 7000);
+            }, 3000);
+        }
+
+        // Initialize floating characters
+        createFloatingKannada();
+    </script>
+</body>
+</html>

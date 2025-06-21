@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildlife of Karnataka - Discover Karnataka</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #0F4C3A 0%, #2D5A27 50%, #4A7C59 100%);
+            min-height: 100vh;
+            color: #1A3B2E;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.03)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.02)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.03)"/></svg>') repeat;
+            background-size: 100px 100px;
+            z-index: -1;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-20px) translateX(10px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+            background: linear-gradient(45deg, #228B22, #32CD32, #00FF7F);
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 15px,
+                rgba(255,255,255,0.1) 15px,
+                rgba(255,255,255,0.1) 30px
+            );
+            animation: shimmer 4s linear infinite;
+        }
+
+        .header::after {
+            content: '🌿🦅🐅🦌🌿';
+            position: absolute;
+            top: 10px;
+            left: 0;
+            right: 0;
+            font-size: 2em;
+            opacity: 0.3;
+            animation: sway 6s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%); }
+            100% { transform: translateX(100%) translateY(100%); }
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+        }
+
+        .header h1 {
+            font-size: 4em;
+            color: #FFF;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.6);
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 4px 4px 8px rgba(0,0,0,0.6), 0 0 20px rgba(255,255,255,0.3); }
+            to { text-shadow: 4px 4px 8px rgba(0,0,0,0.6), 0 0 30px rgba(255,255,255,0.5); }
+        }
+
+        .header p {
+            font-size: 1.3em;
+            color: #F0FFF0;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+        }
+
+        .wildlife-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 35px;
+            margin-bottom: 50px;
+        }
+
+        .wildlife-card {
+            background: transparent;
+            width: 100%;
+            height: 450px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+        }
+
+        .card-inner {
+            position: relative;
+            width: 200%; /* Double width to accommodate both sides */
+            height: 100%;
+            display: flex;
+            transition: transform 0.6s ease-in-out;
+            transform: translateX(0%);
+        }
+
+        .wildlife-card.flipped .card-inner {
+            transform: translateX(-50%); /* Move left by 50% to show the image side */
+        }
+
+        .card-front, .card-back {
+            width: 50%; /* Each side takes half of the doubled width */
+            height: 100%;
+            border-radius: 20px;
+            border: 4px solid #228B22;
+            flex-shrink: 0;
+        }
+
+        .card-front {
+            background: linear-gradient(145deg, #F0FFF0, #E6FFE6, #CCFFCC);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .card-front::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #228B22, #32CD32, #00FF7F, #228B22);
+            animation: colorFlow 3s linear infinite;
+        }
+
+        @keyframes colorFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .card-back {
+            background: linear-gradient(145deg, #1A3B2E, #2D5A27);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .wildlife-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            filter: brightness(1.1);
+        }
+
+        .card-back img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+            transition: transform 0.6s ease;
+        }
+
+        .card-back:hover img {
+            transform: scale(1.05);
+        }
+
+        .wildlife-card h3 {
+            font-size: 2em;
+            color: #0F4C3A;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .wildlife-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #228B22, #32CD32);
+            border-radius: 2px;
+        }
+
+        .wildlife-card p {
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: #1A3B2E;
+            font-size: 1em;
+        }
+
+        .habitat {
+            background: linear-gradient(45deg, #228B22, #32CD32);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.95em;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .features {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .features li {
+            padding: 8px 0;
+            color: #0F4C3A;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .features li:hover {
+            color: #228B22;
+        }
+
+        .features li::before {
+            content: '🌿';
+            margin-right: 12px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-5px); }
+            60% { transform: translateY(-3px); }
+        }
+
+        .conservation-section {
+            background: linear-gradient(135deg, #8B0000 0%, #CD5C5C 50%, #DC143C 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 25px;
+            margin: 50px 0;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .conservation-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="2" fill="rgba(255,255,255,0.08)"/><circle cx="75" cy="75" r="3" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            background-size: 50px 50px;
+            animation: drift 15s linear infinite;
+        }
+
+        @keyframes drift {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-50px) translateY(-50px); }
+        }
+
+        .conservation-section h2 {
+            font-size: 3em;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+        }
+
+        .conservation-section p {
+            font-size: 1.2em;
+            line-height: 2;
+            position: relative;
+            z-index: 1;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(45deg, #0F4C3A, #2D5A27, #4A7C59);
+            color: #F0FFF0;
+            border-radius: 20px;
+            margin-top: 50px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .decorative-border {
+            height: 12px;
+            background: linear-gradient(90deg, #228B22, #32CD32, #00FF7F, #228B22);
+            margin: 30px 0;
+            border-radius: 6px;
+            animation: colorShift 5s ease-in-out infinite;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        @keyframes colorShift {
+            0%, 100% { background: linear-gradient(90deg, #228B22, #32CD32, #00FF7F, #228B22); }
+            50% { background: linear-gradient(90deg, #00FF7F, #228B22, #32CD32, #00FF7F); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.8em;
+            }
+            
+            .wildlife-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+
+            .wildlife-card {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🐅 Wildlife of Karnataka 🦅</h1>
+            <p>Explore the Magnificent Biodiversity of Karnataka's Wild Kingdom</p>
+        </header>
+
+        <div class="decorative-border"></div>
+
+        <div class="wildlife-grid">
+            <div class="wildlife-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div>
+                            <div class="habitat">Bandipur Tiger Reserve</div>
+                            <h3>🐅 Royal Bengal Tiger</h3>
+                            <p>The apex predator of Karnataka's forests, the majestic Royal Bengal Tiger roams the dense woodlands of Bandipur and Nagarhole. These magnificent cats are the crown jewels of Karnataka's wildlife, embodying power, grace, and the wild spirit of the Western Ghats.</p>
+                            <ul class="features">
+                                <li>Population: 120+ Tigers</li>
+                                <li>Prime Territory: Bandipur</li>
+                                <li>Hunting Ground: 900 sq km</li>
+                                <li>Conservation Status: Protected</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <img src="https://images.unsplash.com/photo-1561731216-c3a4d99437d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Royal Bengal Tiger" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="wildlife-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div>
+                            <div class="habitat">Nagarhole National Park</div>
+                            <h3>🐘 Asian Elephant</h3>
+                            <p>The gentle giants of Karnataka's forests, Asian Elephants traverse ancient migration routes through Nagarhole and Bandipur. These intelligent mammals are ecosystem engineers, shaping the landscape and maintaining the delicate balance of forest life.</p>
+                            <ul class="features">
+                                <li>Herd Size: 30-50 Members</li>
+                                <li>Migration Routes: Ancient Paths</li>
+                                <li>Role: Ecosystem Engineers</li>
+                                <li>Habitat: Dense Forests</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <img src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Asian Elephant" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="wildlife-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div>
+                            <div class="habitat">Western Ghats</div>
+                            <h3>🐆 Indian Leopard</h3>
+                            <p>The elusive ghost of Karnataka's forests, the Indian Leopard is a master of stealth and adaptation. Found across various habitats from dense forests to rocky terrains, these spotted cats are perfectly adapted to Karnataka's diverse landscapes.</p>
+                            <ul class="features">
+                                <li>Habitat: Diverse Terrains</li>
+                                <li>Behavior: Nocturnal Hunter</li>
+                                <li>Territory: 15-20 sq km</li>
+                                <li>Climbing: Expert Tree Climber</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <img src="https://images.unsplash.com/photo-1551969014-7d2c4cddf0b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Indian Leopard" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="wildlife-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div>
+                            <div class="habitat">Bhadra Wildlife Sanctuary</div>
+                            <h3>🦌 Spotted Deer</h3>
+                            <p>The graceful spotted deer, also known as Chital, adorns Karnataka's meadows and forest clearings with their elegant presence. These beautiful herbivores are a vital part of the food chain and a photographer's delight with their distinctive spotted coats.</p>
+                            <ul class="features">
+                                <li>Group Living: Large Herds</li>
+                                <li>Distinctive: Spotted Coat</li>
+                                <li>Habitat: Forest Clearings</li>
+                                <li>Diet: Grass & Leaves</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <img src= "wildlifeimages/deer.jpg">
+                    </div>
+                </div>
+            </div>
+
+            <div class="wildlife-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div>
+                            <div class="habitat">Dandeli Wildlife Sanctuary</div>
+                            <h3>🦅 Great Hornbill</h3>
+                            <p>The magnificent Great Hornbill, with its impressive casque and vibrant colors, is the king of Karnataka's avian world. These majestic birds play a crucial role as seed dispersers in the Western Ghats ecosystem, earning them the title of 'Gardeners of the Forest'.</p>
+                            <ul class="features">
+                                <li>Wingspan: Up to 5 feet</li>
+                                <li>Role: Seed Disperser</li>
+                                <li>Nesting: Tree Hollows</li>
+                                <li>Diet: Fruits & Small Animals</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <img src="https://images.unsplash.com/photo-1444464666168-49d633b86797?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Great Hornbill" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="wildlife-card" onclick="flipCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div>
+                            <div class="habitat">Kabini River</div>
+                            <h3>🐊 Mugger Crocodile</h3>
+                            <p>The ancient Mugger Crocodile silently patrols the waters of Kabini and other rivers in Karnataka. These prehistoric survivors have remained virtually unchanged for millions of years, representing the raw, untamed essence of Karnataka's aquatic ecosystems.</p>
+                            <ul class="features">
+                                <li>Length: Up to 12 feet</li>
+                                <li>Habitat: Rivers & Lakes</li>
+                                <li>Age: Living Fossils</li>
+                                <li>Behavior: Ambush Predator</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <img src="wildlifeimages/crocodile.jpg">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="conservation-section">
+            <h2>🌿 Conservation Legacy of Karnataka 🌿</h2>
+            <p>Karnataka stands as a beacon of wildlife conservation in India, home to over 20% of the country's tiger population and numerous endemic species found nowhere else on Earth. From the misty forests of the Western Ghats to the dry deciduous woodlands of the Deccan Plateau, Karnataka's protected areas represent one of the most successful conservation stories in Asia. The state's commitment to preserving its natural heritage ensures that future generations will witness the same magnificent wildlife that has roamed these lands for millennia, maintaining the delicate balance between human progress and nature's sovereignty.</p>
+        </div>
+
+        <div class="decorative-border"></div>
+
+        <footer class="footer">
+            <h3>🌟 Discover Karnataka - Where Wildlife Thrives in Harmony 🌟</h3>
+            <p>Your gateway to experiencing the untamed beauty of Karnataka's magnificent wildlife kingdom</p>
+        </footer>
+    </div>
+
+    <script>
+        function flipCard(card) {
+            card.classList.toggle('flipped');
+        }
+
+        // Add double-click to flip back for better UX
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.wildlife-card');
+            cards.forEach(card => {
+                card.addEventListener('dblclick', function() {
+                    this.classList.remove('flipped');
+                });
+            });
+        });
+
+        // Add subtle parallax effect
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelector('.header');
+            if (parallaxElements) {
+                parallaxElements.style.transform = `translateY(${scrolled * 0.1}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
